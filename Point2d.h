@@ -1,6 +1,8 @@
 #pragma once
 #include "orientationEnum.h"
 
+
+// Point2d class
 class Point2d
 {
 private:
