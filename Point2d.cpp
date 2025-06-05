@@ -7,6 +7,13 @@ Point2d::Point2d(double x, double y)
     , m_y {y}
 {}   
 
+Point2d Point2d::operator+(const Point2d& other) const {
+    return Point2d(getX() + other.getX(), getY() + other.getY());
+}
+
+
+
+
 void Point2d::print() const
 {
     std::cout << "Point2d: " << m_x << ", " << m_y << std::endl;
@@ -41,7 +48,7 @@ double Point2d::getX() const
     return m_x;
 }
 
-// Setters. you could also add limitataions like if  you want it to be limited to like a certian range or smth
+// Setters. you could also add limitataions like if you want it to be limited to like a certian range or smth
 void Point2d::setY(double y)
 {
     m_y = y;

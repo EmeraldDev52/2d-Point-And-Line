@@ -12,7 +12,7 @@ public:
     Point2d() = default;
 
     Point2d(double x, double y);
-    
+    Point2d operator+(const Point2d& other) const;
     void print() const;
     static double distance(const Point2d& p1, const Point2d& p2);
     double distance(const Point2d& p2);
