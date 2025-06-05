@@ -1,5 +1,7 @@
 #pragma once
 
+
+//BoundingBox struct
 struct BoundingBox
 {
     double minX, maxX;

@@ -1,5 +1,6 @@
 #pragma once
 
+//do you really need a comment for this???
 namespace MathConstants
 {
     constexpr double PI = 3.14159265358979323846;

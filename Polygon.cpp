@@ -4,6 +4,10 @@
 #include "MathConsts.h"
 #include "Point2d.h"
 #include "Line2d.h"
+
+
+
+//constructor
 Polygon::Polygon(int sides, double radius, Point2d center)
 {
     if (sides < 3) throw std::invalid_argument("Polygon must have at least 3 sides.");
@@ -20,7 +24,7 @@ Polygon::Polygon(int sides, double radius, Point2d center)
 }
 
 
-
+//prints the vertices of the polygon
 void Polygon::print() const
 {
     std::cout << "Regular Polygon with " << m_vertices.size() << " sides:\n";
@@ -30,12 +34,13 @@ void Polygon::print() const
     }
 }
 
-
+//return the vertices of the polygon
 std::vector<Point2d> Polygon::getVertices() const
 {
     return m_vertices;
 }
-std::vector<Line2d> Polygon::getLines()
+//return the lines of the polygon
+std::vector<Line2d> Polygon::getLines() const
 {
     std::vector<Line2d> lines;
     size_t n = m_vertices.size();
@@ -51,8 +56,8 @@ std::vector<Line2d> Polygon::getLines()
 }
 
 
-
-bool Polygon::overlaps(Polygon& other)
+// checks if two polygons overlap
+bool Polygon::overlaps(const Polygon& other) const
 {
     if(getBoundingBox().intersects(other.getBoundingBox())) return true;
 
@@ -70,12 +75,12 @@ bool Polygon::overlaps(Polygon& other)
     }
     return false;
 }
-bool Polygon::overlaps(Polygon& poly1, Polygon& poly2)
+bool Polygon::overlaps(const Polygon& poly1, const Polygon& poly2)
 {
     return poly1.overlaps(poly2);
 }
 
-
+// returns the bounding box of the polygon
 BoundingBox Polygon::getBoundingBox() const
 {
     const auto& verts = getVertices();

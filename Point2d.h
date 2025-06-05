@@ -15,7 +15,7 @@ public:
     Point2d operator+(const Point2d& other) const;
     void print() const;
     static double distance(const Point2d& p1, const Point2d& p2);
-    double distance(const Point2d& p2);
+    double distance(const Point2d& p2) const;
 
     
     static Orientation orientation(const Point2d& a, const Point2d& b, const Point2d& c);

@@ -2,11 +2,16 @@
 #include "Point2d.h"
 #include "OrientationEnum.h"
 #include <iostream>
+
+
+// Constructor
 Line2d::Line2d(const Point2d& start, const Point2d& end)
     : m_start(start)
     , m_end(end) 
 {}
 
+
+// Checks if two lines intersect
 bool Line2d::intersects(const Line2d& other) const
 {
     Point2d A = m_start, B = m_end;
@@ -21,15 +26,7 @@ bool Line2d::intersects(const Line2d& other) const
 }
 bool Line2d::intersects(const Line2d& line1, const Line2d& line2)
 {
-    Point2d A = line1.getStart(), B = line1.getEnd();
-    Point2d C = line2.getStart(), D = line2.getEnd();
-
-    Orientation o1 = Point2d::orientation(A, B, C);
-    Orientation o2 = Point2d::orientation(A, B, D);
-    Orientation o3 = Point2d::orientation(C, D, A);
-    Orientation o4 = Point2d::orientation(C, D, B);
-
-    return (o1 != o2 && o3 != o4);
+    return line1.intersects(line2);
 }
     
 
@@ -52,7 +49,9 @@ void Line2d::setEnd(const Point2d& end)
 {
     m_end = end;
 }
-void Line2d::print()
+
+//prints the points of the line
+void Line2d::print() const
 {
     std::cout << "Line2d: Start(" << m_start.getX() << ", " << m_start.getY() << "), End(" << m_end.getX() << ", " << m_end.getY() << ")\n";
 }

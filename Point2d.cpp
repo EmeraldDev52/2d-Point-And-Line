@@ -2,33 +2,36 @@
 #include "OrientationEnum.h"
 #include <iostream>
 #include <cmath>
+
+//constructor
 Point2d::Point2d(double x, double y) 
     : m_x {x}
     , m_y {y}
 {}   
 
+//operator overloading for addition of points
 Point2d Point2d::operator+(const Point2d& other) const {
     return Point2d(getX() + other.getX(), getY() + other.getY());
 }
 
-
-
-
+// prints the position of the points
 void Point2d::print() const
 {
     std::cout << "Point2d: " << m_x << ", " << m_y << std::endl;
 }
 
-double Point2d::distance(const Point2d& p1, const Point2d& p2)
-{
-    return std::hypot(p1.getX() - p2.getX(), p1.getY() - p2.getY());
-}
-
-double Point2d::distance(const Point2d& p2)
+//gets the distance between two points
+double Point2d::distance(const Point2d& p2) const
 {
     return std::hypot(m_x - p2.getX(), m_y - p2.getY());
 }
 
+double Point2d::distance(const Point2d& p1, const Point2d& p2)
+{
+    return p1.distance(p2);
+}
+
+//return the orientation of the points. the orientation is colinear if when looking at b from a, c is straight ahead, clockwise if c is to the right of b, and counterclockwise if c is to the left of b
 Orientation Point2d::orientation(const Point2d& a, const Point2d& b, const Point2d& c)
 {
     double val = (b.getY() - a.getY()) * (c.getX() - b.getX()) -

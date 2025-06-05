@@ -3,6 +3,7 @@
 #include "Point2d.h"
 #include "OrientationEnum.h"
 
+//line2d class
 class Line2d
 {
 private:
@@ -16,7 +17,7 @@ public:
     bool intersects(const Line2d& other) const;
     static bool intersects(const Line2d& line1, const Line2d& line2);
     
-    void print();
+    void print() const;
 
     //Getters
     Point2d getStart() const;
