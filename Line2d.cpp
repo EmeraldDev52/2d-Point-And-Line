@@ -19,7 +19,7 @@ bool Line2d::intersects(const Line2d& other) const
 
     return (o1 != o2 && o3 != o4);
 }
-static bool intersects(const Line2d& line1, const Line2d& line2)
+bool Line2d::intersects(const Line2d& line1, const Line2d& line2)
 {
     Point2d A = line1.getStart(), B = line1.getEnd();
     Point2d C = line2.getStart(), D = line2.getEnd();

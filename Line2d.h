@@ -1,11 +1,16 @@
 #pragma once
 
+#include "Point2d.h"
+#include "OrientationEnum.h"
+
 class Line2d
 {
 private:
     Point2d m_start{0, 0};
     Point2d m_end{0, 0};
 public:
+    Line2d() = default;
+    
     Line2d(const Point2d& start, const Point2d& end);
 
     bool intersects(const Line2d& other) const;
