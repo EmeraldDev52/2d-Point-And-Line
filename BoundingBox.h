@@ -1,13 +1,12 @@
 #pragma once
-
+#include "Point2d.h"
 
 //BoundingBox struct
 struct BoundingBox
 {
-    double minX, maxX;
-    double minY, maxY;
+    Point2d topLeft, bottomRight;
 
-    BoundingBox(double minX, double maxX, double minY, double maxY);
+    BoundingBox(Point2d topLeft, Point2d bottomRight);
 
     bool intersects(const BoundingBox& other) const;
     static bool intersects(const BoundingBox& box1, const BoundingBox& box2);

@@ -1,10 +1,9 @@
 #include "Polygon.h"
+#define _USE_MATH_DEFINES
 #include <cmath>
 #include <iostream>
-#include "MathConsts.h"
 #include "Point2d.h"
 #include "Line2d.h"
-
 
 
 //constructor
@@ -12,7 +11,7 @@ Polygon::Polygon(int sides, double radius, Point2d center)
 {
     if (sides < 3) throw std::invalid_argument("Polygon must have at least 3 sides.");
 
-    const double angleStep = 2 * MathConstants::PI / sides;
+    const double angleStep = 2 * M_PI / sides;
 
     for (int i = 0; i < sides; ++i)
     {
@@ -85,19 +84,19 @@ BoundingBox Polygon::getBoundingBox() const
 {
     const auto& verts = getVertices();
 
-    double minX = verts[0].getX();
-    double maxX = verts[0].getX();
-    double minY = verts[0].getY();
-    double maxY = verts[0].getY();
+    double minX = verts[0].m_x;
+    double maxX = verts[0].m_x;
+    double minY = verts[0].m_y;
+    double maxY = verts[0].m_y;
 
     for (const auto& p : verts)
     {
-        if (p.getX() < minX) minX = p.getX();
-        if (p.getX() > maxX) maxX = p.getX();
-        if (p.getY() < minY) minY = p.getY();
-        if (p.getY() > maxY) maxY = p.getY();
+        if (p.m_x < minX) minX = p.m_x;
+        if (p.m_x > maxX) maxX = p.m_x;
+        if (p.m_y < minY) minY = p.m_y;
+        if (p.m_y > maxY) maxY = p.m_y;
     }
 
-    return BoundingBox{minX, maxX, minY, maxY};
+    return BoundingBox(Point2d(minX, maxY), Point2d(maxX, minY));
 }
 

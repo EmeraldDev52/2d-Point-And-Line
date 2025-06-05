@@ -6,10 +6,12 @@
 //line2d class
 class Line2d
 {
-private:
+
+public:
     Point2d m_start{0, 0};
     Point2d m_end{0, 0};
-public:
+
+    
     Line2d() = default;
     
     Line2d(const Point2d& start, const Point2d& end);
@@ -18,12 +20,4 @@ public:
     static bool intersects(const Line2d& line1, const Line2d& line2);
     
     void print() const;
-
-    //Getters
-    Point2d getStart() const;
-    Point2d getEnd() const;
-
-    // Setters. you could also add limitations here if you want to
-    void setStart(const Point2d& start);
-    void setEnd(const Point2d& end);
 };

@@ -19,8 +19,8 @@ int main() {
     // Operator+
     Point2d p1(1, 2), p2(-1, -3);
     Point2d sum = p1 + p2;
-    assert(sum.getX() == 0);
-    assert(sum.getY() == -1);
+    assert(sum.m_x == 0);
+    assert(sum.m_y == -1);
 
     // Lines
     Line2d l1(Point2d(0, 0), Point2d(1, 1));
@@ -37,15 +37,17 @@ int main() {
     // Polygon bounding box — square
     Polygon square(4, 2, Point2d(0, 0));
     BoundingBox box = square.getBoundingBox();
-    Point2d tl = Point2d(box.minX, box.maxY);
-    Point2d br = Point2d(box.maxX, box.minY);
-    assert(tl.getX() < br.getX());
-    assert(tl.getY() > br.getY());
+    Point2d tl = box.topLeft;
+    Point2d br = box.bottomRight;
+    assert(tl.m_x < br.m_x);
+    assert(tl.m_y > br.m_y);
 
     // Polygon bounding box — tiny polygon
     Polygon tiny(3, 1e-6, Point2d(0, 0));
     BoundingBox tbox = tiny.getBoundingBox();
-    assert(Point2d::distance(Point2d(tbox.minX, tbox.maxY), Point2d(tbox.maxX, tbox.minY)) < 1e-5);
+    Point2d t_tl = tbox.topLeft;
+    Point2d t_br = tbox.bottomRight;
+    assert(Point2d::distance(t_tl, t_br) < 1e-5);
 
     // Polygon overlap — nested
     Polygon bigPoly(10, 10.0, Point2d(0, 0));
@@ -69,8 +71,8 @@ int main() {
     // Degenerate polygon
     Polygon flat(3, 0.0, Point2d(0, 0));
     BoundingBox flatBox = flat.getBoundingBox();
-    assert(flatBox.minX == flatBox.maxX);
-    assert(flatBox.maxY == flatBox.minY);
+    assert(flatBox.topLeft.m_x == flatBox.bottomRight.m_x);
+    assert(flatBox.topLeft.m_y == flatBox.bottomRight.m_y);
 
     std::cin.get();
     return 0;

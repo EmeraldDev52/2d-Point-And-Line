@@ -1,17 +1,20 @@
 #include "BoundingBox.h"
 
 //constructor
-BoundingBox::BoundingBox(double minX, double maxX, double minY, double maxY)
-    : minX(minX)
-    , maxX(maxX)
-    , minY(minY)
-    , maxY(maxY) 
+BoundingBox::BoundingBox(Point2d topLeft, Point2d bottomRight)
+    : topLeft(topLeft)
+    , bottomRight(bottomRight)
 {}
 
 // checks if 2 bounding boxes overlap
 bool BoundingBox::intersects(const BoundingBox& other) const {
-    return !(other.minX > maxX || other.maxX < minX || 
-             other.minY > maxY || other.maxY < minY);
+    if (bottomRight.m_x < other.topLeft.m_x ||  // this box is left of other
+        topLeft.m_x > other.bottomRight.m_x ||  // this box is right of other
+        topLeft.m_y < other.bottomRight.m_y ||  // this box is below other 
+        bottomRight.m_y > other.topLeft.m_y     // this box is above other
+    ) { return false; }
+    
+    return true;
 }
 static bool intersects(const BoundingBox& box1, const BoundingBox& box2){
     return box1.intersects(box2);

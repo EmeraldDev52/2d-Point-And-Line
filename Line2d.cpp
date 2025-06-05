@@ -15,7 +15,7 @@ Line2d::Line2d(const Point2d& start, const Point2d& end)
 bool Line2d::intersects(const Line2d& other) const
 {
     Point2d A = m_start, B = m_end;
-    Point2d C = other.getStart(), D = other.getEnd();
+    Point2d C = other.m_start, D = other.m_end;
 
     Orientation o1 = Point2d::orientation(A, B, C);
     Orientation o2 = Point2d::orientation(A, B, D);
@@ -30,28 +30,8 @@ bool Line2d::intersects(const Line2d& line1, const Line2d& line2)
 }
     
 
-//Getters
-Point2d Line2d::getStart() const
-{
-    return m_start;
-}
-Point2d Line2d::getEnd() const
-{
-    return m_end;
-}
-
-// Setters. you could also add limitations here if you want to
-void Line2d::setStart(const Point2d& start)
-{
-    m_start = start;
-}
-void Line2d::setEnd(const Point2d& end)
-{
-    m_end = end;
-}
-
 //prints the points of the line
 void Line2d::print() const
 {
-    std::cout << "Line2d: Start(" << m_start.getX() << ", " << m_start.getY() << "), End(" << m_end.getX() << ", " << m_end.getY() << ")\n";
+    std::cout << "Line2d: Start(" << m_start.m_x << ", " << m_start.m_y << "), End(" << m_end.m_x << ", " << m_end.m_y << ")\n";
 }
