@@ -14,8 +14,13 @@ public:
 
     Vector2d(double x, double y);
     Vector2d operator+(const Vector2d& other) const;
+    Vector2d operator-(const Vector2d& other) const;
+
+    double magnitude() const;
+
+    Vector2d normalized() const;
+
     void print() const;
-    static double distance(const Vector2d& p1, const Vector2d& p2);
-    double distance(const Vector2d& p2) const;
+
 
 };

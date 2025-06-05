@@ -11,5 +11,8 @@ struct Point2d {
     Point2d operator-(const Point2d& other) const;
     bool operator==(const Point2d& other) const;
 
+    static double distance(const Point2d& p1, const Point2d& p2);
+    double distance(const Point2d& p2) const;
+
     void print() const;
 };

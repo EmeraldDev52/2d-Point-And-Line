@@ -20,6 +20,7 @@ public:
     const Point2d& getStart() const { return m_start; }
     const Point2d& getEnd() const { return m_end; }
     
+
     Vector2d getDirection() const;
 
     void print() const;

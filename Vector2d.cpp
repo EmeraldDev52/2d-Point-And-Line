@@ -20,19 +20,18 @@ void Vector2d::print() const
     std::cout << "Vector2d: " << m_x << ", " << m_y << std::endl;
 }
 
-//gets the distance between two points
-double Vector2d::distance(const Vector2d& p2) const
-{
-    return std::hypot(m_x - p2.m_x, m_y - p2.m_y);
+Vector2d Vector2d::operator-(const Vector2d& other) const{
+    return Vector2d(this->m_x - other.m_x, this->m_y - other.m_y);
 }
 
-double Vector2d::distance(const Vector2d& p1, const Vector2d& p2)
-{
-    return p1.distance(p2);
+double Vector2d::magnitude() const {
+    return std::hypot(this->m_x, this->m_y);
 }
-
-
-
+Vector2d Vector2d::normalized() const{
+    double mag = magnitude();
+    if (mag == 0.0) return Vector2d(0, 0); // Avoid division by zero
+    return Vector2d(m_x / mag, m_y / mag);
+}
 
 
 
