@@ -23,8 +23,8 @@ int main()
     std::cout << second.getX() << ", " << second.getY() << '\n';
 
     line2.print();
-    first.setPoint(1.0, 2.0);
-    second.setPoint(5.0, 6.0);
+    first = Point2d(1.0, 2.0);
+    second = Point2d(5.0, 6.0);
 
     first.print();
     second.print();
