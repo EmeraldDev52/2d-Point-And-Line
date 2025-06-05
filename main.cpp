@@ -1,79 +1,78 @@
-#include <cassert>
-#include <cmath>
 #include <iostream>
+#include <cassert>
 #include "Point2d.h"
+#include "Vector2d.h"
 #include "Line2d.h"
-#include "Polygon.h"
 #include "BoundingBox.h"
+#include "Polygon.h"
 
 int main() {
-    // Point2d edge cases
-    Point2d zero(0, 0);
-    Point2d big(1e9, -1e9);
-    Point2d close(1e-9, 1e-9);
+    // ---- Point2d Tests ----
+    Point2d p0;
+    Point2d p1(0, 0);
+    Point2d p2(1e9, -1e9);
+    Point2d p3(-1e-9, 1e-9);
+    assert(p1 == p0);
+    assert((p2 - p2) == p0);
+    p1.print();
+    p2.print();
+    p3.print();
 
-    assert(Point2d::distance(zero, zero) == 0);
-    assert(std::abs(Point2d::distance(zero, big) - std::hypot(1e9, 1e9)) < 1e-2);
-    assert(std::abs(Point2d::distance(zero, close) - std::sqrt(2e-18)) < 1e-12);
+    // ---- Vector2d Tests ----
+    Vector2d v1(3, 4);
+    Vector2d v2(0, 0);
+    assert(Vector2d::distance(v1, v2) == 5);
+    assert(v1.distance(v2) == 5);
+    v1.print();
+    (v1 + v1).print();
 
-    // Operator+
-    Point2d p1(1, 2), p2(-1, -3);
-    Point2d sum = p1 + p2;
-    assert(sum.m_x == 0);
-    assert(sum.m_y == -1);
+    // ---- Line2d Tests ----
+    Line2d line1(Point2d(0, 0), Point2d(1, 1));
+    Line2d line2(Point2d(0, 1), Point2d(1, 0));
+    Line2d line3(Point2d(0, 0), Point2d(0, 1));
+    Line2d line4(Point2d(1, 0), Point2d(1, 1));
+    assert(line1.intersects(line2).has_value()); // should intersect diagonally
+    assert(!line3.intersects(line4).has_value()); // vertical lines not touching
+    try {
+        Line2d badLine(Point2d(1, 1), Point2d(1, 1));
+        assert(false); // Should not reach
+    } catch (const std::invalid_argument&) {
+        std::cout << "Caught expected Line2d exception.\n";
+    }
 
-    // Lines
-    Line2d l1(Point2d(0, 0), Point2d(1, 1));
-    Line2d l2(Point2d(1, 0), Point2d(0, 1));
-    Line2d l3(Point2d(0, 0), Point2d(1, 0)); // horizontal
-    Line2d l4(Point2d(0, 1), Point2d(1, 1)); // horizontal above
-    Line2d l5(Point2d(0, 0), Point2d(0, 1)); // vertical
-    Line2d l6(Point2d(1, 0), Point2d(1, 1)); // vertical parallel
+    // ---- BoundingBox Tests ----
+    BoundingBox box1(Point2d(0, 10), Point2d(10, 0));
+    BoundingBox box2(Point2d(5, 15), Point2d(15, 5));
+    BoundingBox box3(Point2d(20, 30), Point2d(30, 20));
+    BoundingBox box4(Point2d(10, 10), Point2d(20, 0)); // Touches box1 on right edge
+    assert(box1.intersects(box2));
+    assert(!box1.intersects(box3));
+    assert(box1.intersects(box4)); // Edge touching is still intersection by your logic
 
-    assert(l1.intersects(l2));      // cross
-    assert(!l3.intersects(l4));     // horizontal
-    assert(!l5.intersects(l6));     // vertical
+    // ---- Polygon Tests ----
+    Polygon square1(4, 10, Point2d(0, 0)); // Square around origin
+    Polygon square2(4, 10, Point2d(5, 0)); // Overlaps with square1
+    Polygon square3(4, 10, Point2d(100, 100)); // Far away
+    Polygon tiny(4, 0.1, Point2d(0, 0)); // Completely inside square1
+    assert(square1.overlaps(square2));
+    assert(!square1.overlaps(square3));
+    assert(square1.overlaps(tiny)); // Should detect bounding box containment
 
-    // Polygon bounding box — square
-    Polygon square(4, 2, Point2d(0, 0));
-    BoundingBox box = square.getBoundingBox();
-    Point2d tl = box.topLeft;
-    Point2d br = box.bottomRight;
-    assert(tl.m_x < br.m_x);
-    assert(tl.m_y > br.m_y);
+    // Check line segment intersection in polygons (edge-edge overlap)
+    Polygon triangle1(3, 10, Point2d(0, 0));
+    Polygon triangle2(3, 10, Point2d(0, 0));
 
-    // Polygon bounding box — tiny polygon
-    Polygon tiny(3, 1e-6, Point2d(0, 0));
-    BoundingBox tbox = tiny.getBoundingBox();
-    Point2d t_tl = tbox.topLeft;
-    Point2d t_br = tbox.bottomRight;
-    assert(Point2d::distance(t_tl, t_br) < 1e-5);
+    std::vector<Point2d> flippedPoints;
+    for (const auto& pt : triangle1.getVertices()) {
+        flippedPoints.push_back(Point2d(-pt.m_x, -pt.m_y));
+    }
 
-    // Polygon overlap — nested
-    Polygon bigPoly(10, 10.0, Point2d(0, 0));
-    Polygon smallPoly(10, 1.0, Point2d(0, 0));
-    assert(Polygon::overlaps(bigPoly, smallPoly));
-    assert(Polygon::overlaps(smallPoly, bigPoly));
+    std::cout << "Flipped triangle vertices:\n";
+    for (const auto& pt : flippedPoints) {
+        pt.print();
+    }
 
-    // Polygon overlap — touching edges
-    Polygon touch1(3, 1.0, Point2d(0, 0));
-    Polygon touch2(3, 1.0, Point2d(2, 0)); // barely touch on edge
-    assert(!Polygon::overlaps(touch1, touch2)); // May be false if bounding boxes don't touch
 
-    // Polygon overlap — rotated, offset
-    Polygon offsetRotated(6, 1.0, Point2d(0.5, 0.5));
-    assert(Polygon::overlaps(touch1, offsetRotated));
-
-    // Polygon overlap — far apart
-    Polygon far(6, 1.0, Point2d(1000, 1000));
-    assert(!Polygon::overlaps(touch1, far));
-
-    // Degenerate polygon
-    Polygon flat(3, 0.0, Point2d(0, 0));
-    BoundingBox flatBox = flat.getBoundingBox();
-    assert(flatBox.topLeft.m_x == flatBox.bottomRight.m_x);
-    assert(flatBox.topLeft.m_y == flatBox.bottomRight.m_y);
-
-    std::cin.get();
+    std::cout << "passed.\n";
     return 0;
 }

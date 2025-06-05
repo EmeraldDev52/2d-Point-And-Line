@@ -1,5 +1,5 @@
 #pragma once
-#include "Point2d.h"
+#include "Vector2d.h"
 #include <vector>
 #include "BoundingBox.h"
 #include "Line2d.h"

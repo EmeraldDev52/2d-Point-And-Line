@@ -4,6 +4,8 @@
 #include <iostream>
 #include "Point2d.h"
 #include "Line2d.h"
+#include "Line2d.h"
+static_assert(std::is_class_v<Line2d>, "Line2d class is not defined");
 
 
 //constructor
@@ -66,10 +68,11 @@ bool Polygon::overlaps(const Polygon& other) const
     {
         for (const auto& line2 : lines2)
         {
-            if (line1.intersects(line2))
+            if (line1.intersects(line2).has_value())
             {
                 return true;
             }
+
         }
     }
     return false;

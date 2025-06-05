@@ -1,5 +1,5 @@
 #include "BoundingBox.h"
-
+#include "Point2d.h"
 //constructor
 BoundingBox::BoundingBox(Point2d topLeft, Point2d bottomRight)
     : topLeft(topLeft)
