@@ -52,11 +52,6 @@ void Line2d::setEnd(const Point2d& end)
 {
     m_end = end;
 }
-void Line2d::setLine(const Point2d& start, const Point2d& end)
-{
-    m_start = start;
-    m_end = end;
-}
 void Line2d::print()
 {
     std::cout << "Line2d: Start(" << m_start.getX() << ", " << m_start.getY() << "), End(" << m_end.getX() << ", " << m_end.getY() << ")\n";

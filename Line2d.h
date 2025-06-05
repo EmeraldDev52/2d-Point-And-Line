@@ -25,6 +25,4 @@ public:
     // Setters. you could also add limitations here if you want to
     void setStart(const Point2d& start);
     void setEnd(const Point2d& end);
-
-    void setLine(const Point2d& start, const Point2d& end);
 };

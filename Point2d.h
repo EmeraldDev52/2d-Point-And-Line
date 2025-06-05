@@ -27,5 +27,4 @@ public:
 
     void setY(double y);
     void setX(double x);
-    void setPoint(double x, double y);
 };

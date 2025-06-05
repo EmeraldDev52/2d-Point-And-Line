@@ -52,9 +52,4 @@ void Point2d::setX(double x)
     m_x = x;
 }
 
-void Point2d::setPoint(double x, double y)
-{
-    m_x = x;
-    m_y = y;
-}
 
