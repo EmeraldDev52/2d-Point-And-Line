@@ -11,6 +11,7 @@ public:
     bool intersects(const Line2d& other) const;
     static bool intersects(const Line2d& line1, const Line2d& line2);
     
+    void print();
 
     //Getters
     Point2d getStart() const;

@@ -12,6 +12,7 @@ public:
     Point2d() = default;
 
     Point2d(double x, double y);
+    
     void print() const;
     static double distance(const Point2d& p1, const Point2d& p2);
     double distance(const Point2d& p2);
