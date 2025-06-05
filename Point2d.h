@@ -1,3 +1,4 @@
+#pragma once
 #include "orientationEnum.h"
 
 class Point2d
@@ -25,5 +26,5 @@ public:
 
     void setY(double y);
     void setX(double x);
-
+    void setPoint(double x, double y);
 };

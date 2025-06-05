@@ -1,8 +1,10 @@
+#pragma once
+
 class Line2d
 {
 private:
-    Point2d m_start;
-    Point2d m_end;
+    Point2d m_start{0, 0};
+    Point2d m_end{0, 0};
 public:
     Line2d(const Point2d& start, const Point2d& end);
 

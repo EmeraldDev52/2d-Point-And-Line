@@ -1,6 +1,6 @@
 #include "Line2d.h"
 #include "Point2d.h"
-
+#include "OrientationEnum.h"
 
 Line2d::Line2d(const Point2d& start, const Point2d& end)
     : m_start(start)
