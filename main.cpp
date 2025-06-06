@@ -22,5 +22,7 @@ int main() {
     v2.normalized().print();
     std::cout << "v3 normalized: " << std::endl;
     v3.normalized().print();
+    Line2d line1(Point2d(0, 0), Point2d(4, 4));
+    std::cout << line1.length() << std::endl;
     std::cin.get();
 }

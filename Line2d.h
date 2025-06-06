@@ -19,9 +19,13 @@ public:
 
     const Point2d& getStart() const { return m_start; }
     const Point2d& getEnd() const { return m_end; }
+
+    void setStart(const Point2d& start);
+    void setEnd(const Point2d& end);
     
 
     Vector2d getDirection() const;
+    double length() const;
 
     void print() const;
 

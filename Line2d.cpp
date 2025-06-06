@@ -83,3 +83,19 @@ Vector2d Line2d::getDirection() const
 {
     return Vector2d(m_end.m_x - m_start.m_x, m_end.m_y - m_start.m_y);
 }
+double Line2d::length() const
+{
+    return m_start.distance(m_end);
+}
+void Line2d::setStart(const Point2d& start){
+    if (start == m_end) {
+        throw std::invalid_argument("Start point cannot be the same as the end point");
+    }
+    m_start = start;
+}
+void Line2d::setEnd(const Point2d& end){
+    if (end == m_start) {
+        throw std::invalid_argument("Start point cannot be the same as the end point");
+    }
+    m_end = end;
+}
