@@ -28,7 +28,7 @@
 
 ----------
 
-Option 2: Use FetchContent to add the library automatically
+### Option 2: Use FetchContent to add the library automatically
 
 Add this to your project’s CMakeLists.txt instead of cloning:
 
