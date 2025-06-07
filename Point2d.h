@@ -26,5 +26,3 @@ struct Point2d {
 
 
 
-// CONSTS
-const Point2d Point2d::ZERO = Point2d(0.0, 0.0);

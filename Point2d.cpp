@@ -26,3 +26,11 @@ double Point2d::distance(const Point2d& p1, const Point2d& p2){
 double Point2d::distance(const Point2d& p2) const{
     return std::hypot(this->m_x - p2.m_x, this->m_y - p2.m_y);    
 }
+
+
+
+
+
+
+// CONSTS
+const Point2d Point2d::ZERO = Point2d(0.0, 0.0);

@@ -7,5 +7,5 @@
 #include "Polygon.h"
 
 int main() {
-    
+  Point2d::ZERO.print();  
 }
