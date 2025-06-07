@@ -35,3 +35,14 @@ Vector2d Vector2d::normalized() const{
 
 
 
+
+
+
+
+
+//CONSTS
+const Vector2d Vector2d::ZERO = Vector2d(0.0, 0.0);
+const Vector2d Vector2d::UP = Vector2d(0.0, 1.0);
+const Vector2d Vector2d::DOWN = Vector2d(0.0, -1.0);
+const Vector2d Vector2d::LEFT = Vector2d(-1.0, 0.0);
+const Vector2d Vector2d::RIGHT = Vector2d(1.0, 0.0);

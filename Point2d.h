@@ -15,4 +15,16 @@ struct Point2d {
     double distance(const Point2d& p2) const;
 
     void print() const;
+    
+    //CONSTS
+    static const Point2d ZERO;
 };
+
+
+
+
+
+
+
+// CONSTS
+const Point2d Point2d::ZERO = Point2d(0.0, 0.0);

@@ -100,4 +100,3 @@ BoundingBox Polygon::getBoundingBox() const
 
     return BoundingBox(Point2d(minX, maxY), Point2d(maxX, minY));
 }
-

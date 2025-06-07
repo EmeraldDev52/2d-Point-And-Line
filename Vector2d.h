@@ -22,5 +22,10 @@ public:
 
     void print() const;
 
-
+    //CONSTS
+    static const Vector2d ZERO;
+    static const Vector2d UP;
+    static const Vector2d DOWN;
+    static const Vector2d LEFT;
+    static const Vector2d RIGHT;
 };
