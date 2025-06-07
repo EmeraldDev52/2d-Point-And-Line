@@ -1,5 +1,5 @@
 #include "../include/Geo2d/Polygon.h"
-#define _USE_MATH_DEFINES
+#define M_PI 3.14159265358979323846
 #include <cmath>
 #include <iostream>
 #include "../include/Geo2d/Vector2d.h"
