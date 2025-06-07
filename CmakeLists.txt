@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.10)
+project(geometry2d VERSION 1.0 LANGUAGES CXX)
+
+file(GLOB SOURCES "src/*.cpp")
+
+add_library(geometry2d ${SOURCES})
+
+target_include_directories(geometry2d
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
+)
+
+set_target_properties(geometry2d PROPERTIES
+    CXX_STANDARD 17
+    CXX_STANDARD_REQUIRED ON
+)
