@@ -1,4 +1,4 @@
-# NOTE: THIS IS MY FIRST TIME USING A BUILD SYSTEM SO IT MAY NOT WORK AS EXPECTED
+# NOTE: THIS IS MY FIRST TIME USING A BUILD SYSTEM SO IT MAY NOT WORK AS THE INSTRUCTIONS SAY
 # Geometry2d
 
 ### A small C++ static library for 2D geometry (vectors, lines, polygons, etc).
