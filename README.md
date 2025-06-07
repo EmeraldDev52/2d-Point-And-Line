@@ -8,20 +8,22 @@
 ### Option 1: Add the library manually
 
 1.  Clone this repo somewhere inside your project folder:
-    ``` git clone https://github.com/EmeraldDev52/2d-geometry.git```
+    ```bash
+     git clone https://github.com/EmeraldDev52/2d-geometry.git
+    ```
     
-2.  In your project’s CMakeLists.txt, add:  
+3.  In your project’s CMakeLists.txt, add:  
     ```add_subdirectory(path/to/2d-geometry)```
     
-3.  Link the library to your target:  
+4.  Link the library to your target:  
     ```target_link_libraries(your_target PRIVATE geometry2d)```
     
-4.  Include the headers in your code:  
+5.  Include the headers in your code:  
     ```cpp
     #include <Geo2d/Point2d.h>
     ```
     
-5. Build your project as usual with CMake.
+6. Build your project as usual with CMake.
     
 
 ----------
