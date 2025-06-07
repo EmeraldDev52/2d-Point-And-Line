@@ -1,19 +1,36 @@
 # geometry2d
 
-A simple 2D geometry library for C++.
+A small C++ library for 2D geometry (points, lines, etc.).
 
-## How to Use geometry2d in Your Project
+## How to use
 
-This guide explains how to add the `geometry2d` library to your C++ project using CMake.
+### option 1
 
----
+1.  Clone this repo somewhere in your project folder:  
+    `git clone https://github.com/yourusername/geometry2d.git`
+    
+2.  In your project’s `CMakeLists.txt`, add:  
+    `add_subdirectory(path/to/geometry2d)`
+    
+3.  Link the library to your target:  
+    `target_link_libraries(your_target PRIVATE geometry2d)`
+    
+4.  Include the headers in your code:  
+    `#include <geometry2d/Point2d.h>`
+    
+5.  Build your project as usual with CMake.
+    
 
-### Step 1: Clone or Download the Library
+### Option2 : Use FetchContent to add the library automatically
 
-You have two main options:
+Add this to your `CMakeLists.txt` instead of cloning:
 
-#### Option A: Clone the Repo Inside Your Project
+```CMmake
+include(FetchContent)
+FetchContent_Declare(
+  geometry2d
+  GIT_REPOSITORY https://github.com/EmeraldDev52/2d-geometry.git
+  GIT_TAG main
+)
+FetchContent_MakeAvailable(geometry2d)
 
-```bash
-git clone https://github.com/yourusername/geometry2d.git path/to/geometry2d
-```
