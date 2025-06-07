@@ -5,8 +5,6 @@
 #include "Point2d.h"
 #include "Line2d.h"
 #include "Line2d.h"
-static_assert(std::is_class_v<Line2d>, "Line2d class is not defined");
-
 
 //constructor
 Polygon::Polygon(int sides, double radius, Point2d center)
