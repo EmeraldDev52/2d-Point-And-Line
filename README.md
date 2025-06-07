@@ -8,7 +8,7 @@
 ### Option 1: Add the library manually
 
 1.  Clone this repo somewhere inside your project folder:
-    ``` git clone [https://github.com/EmeraldDev52/2d-geometry.git](https://github.com/EmeraldDev52/2d-geometry.git)```
+    ``` git clone https://github.com/EmeraldDev52/2d-geometry.git```
     
 2.  In your project’s CMakeLists.txt, add:  
     ```add_subdirectory(path/to/2d-geometry)```
