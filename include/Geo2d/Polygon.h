@@ -12,17 +12,17 @@ namespace Geo2d{
     class Polygon
     {
     private:
-        std::vector<Point2d> m_vertices;
+        std::vector<Vector2d> m_vertices;
 
 
     public:
-        Polygon(int sides, double radius, Point2d origin);// constructor
+        Polygon(int sides, double radius, Vector2d origin);// constructor
 
 
         void print() const;// prints the vertices of the polygon
 
 
-        std::vector<Point2d> getVertices() const;// returns the vertices of the polygon
+        std::vector<Vector2d> getVertices() const;// returns the vertices of the polygon
         std::vector<Line2d> getLines() const;// returns the lines between adjascent vertices of the polygon
 
 

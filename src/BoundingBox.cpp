@@ -1,11 +1,11 @@
 #include "../include/Geo2d/BoundingBox.h"
-#include "../include/Geo2d/Point2d.h"
+#include "../include/Geo2d/Vector2d.h"
 
 
 
 namespace Geo2d{
     // constructor
-    BoundingBox::BoundingBox(Point2d tl, Point2d br)
+    BoundingBox::BoundingBox(Vector2d tl, Vector2d br)
         : topLeft{topLeft}
         , bottomRight{bottomRight}
     {}

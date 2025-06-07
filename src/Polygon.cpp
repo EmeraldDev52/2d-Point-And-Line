@@ -2,7 +2,7 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <iostream>
-#include "../include/Geo2d/Point2d.h"
+#include "../include/Geo2d/Vector2d.h"
 #include "../include/Geo2d/Line2d.h"
 #include "../include/Geo2d/Line2d.h"
 
@@ -10,7 +10,7 @@
 
 namespace Geo2d{
     //constructor
-    Polygon::Polygon(int sides, double radius, Point2d origin)
+    Polygon::Polygon(int sides, double radius, Vector2d origin)
     {
         if (sides < 3) throw std::invalid_argument("Polygon must have at least 3 sides.");
 
@@ -21,7 +21,7 @@ namespace Geo2d{
             double angle = i * angleStep;
             double x = radius * std::cos(angle);
             double y = radius * std::sin(angle);
-            m_vertices.push_back(origin + Point2d(x, y));
+            m_vertices.push_back(origin + Vector2d(x, y));
         }
     }
 
@@ -38,7 +38,7 @@ namespace Geo2d{
 
 
     //return the vertices of the polygon
-    std::vector<Point2d> Polygon::getVertices() const
+    std::vector<Vector2d> Polygon::getVertices() const
     {
         return m_vertices;
     }
@@ -53,8 +53,8 @@ namespace Geo2d{
         // loops through the vertices and returns the lines between adjascent vertices
         for (size_t i = 0; i < n; ++i)
         {
-            const Point2d& start = m_vertices[i];
-            const Point2d& end = m_vertices[(i + 1) % n];
+            const Vector2d& start = m_vertices[i];
+            const Vector2d& end = m_vertices[(i + 1) % n];
             lines.emplace_back(start, end);
         }
 
@@ -107,6 +107,6 @@ namespace Geo2d{
             if (p.y > maxY) maxY = p.y;
         }
 
-        return BoundingBox(Point2d(minX, maxY), Point2d(maxX, minY));
+        return BoundingBox(Vector2d(minX, maxY), Vector2d(maxX, minY));
     }
 }
