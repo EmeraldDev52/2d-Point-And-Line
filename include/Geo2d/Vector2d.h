@@ -7,21 +7,39 @@ namespace Geo2d{
     // Vector2d struct
     struct Vector2d
     {
-        double m_x{0.0};
-        double m_y{0.0};
+        double x{0.0};
+        double y{0.0};
 
         
-        Vector2d() = default;
 
-        Vector2d(double x, double y);
+        Vector2d() = default;// default constructor
+        Vector2d(double x, double y);// constructor
+
+
+        //operator overloads
         Vector2d operator+(const Vector2d& other) const;
         Vector2d operator-(const Vector2d& other) const;
+        Vector2d operator*(double scalar) const;
+        Vector2d operator/(double scalar) const;
+        bool operator==(const Vector2d& other) const;
+        bool operator!=(const Vector2d& other) const;
 
-        double magnitude() const;
 
-        Vector2d normalized() const;
+        // returns the distance between two vectors
+        double distance(const Vector2d& v2) const;
 
-        void print() const;
+
+        double magnitude() const;// returns the magnitude(length) of the vector
+
+
+        Vector2d normalized() const;// returns the normalized vector
+
+
+        void print() const;// prints the position of the vector
+
+
+
+
 
         //CONSTS
         static const Vector2d ZERO;

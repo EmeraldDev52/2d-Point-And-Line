@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Point2d.h"
+#include "Vector2d.h"
 
 
 
@@ -8,10 +8,10 @@ namespace Geo2d{
     // BoundingBox struct
     struct BoundingBox
     {
-        Point2d topLeft, bottomRight;
+        Vector2d topLeft, bottomRight;
 
 
-        BoundingBox(Point2d tl, Point2d br);// constructor
+        BoundingBox(Vector2d tl, Vector2d br);// constructor
 
 
         bool intersects(const BoundingBox& other) const;// checks if 2 bounding boxes overlap

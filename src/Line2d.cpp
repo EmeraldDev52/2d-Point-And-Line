@@ -1,14 +1,14 @@
 #include "../include/Geo2d/Line2d.h"
 #include <iostream> 
 #include <optional> 
-#include "../include/Geo2d/Point2d.h"
+#include "../include/Geo2d/Vector2d.h"
 #include "../include/Geo2d/Vector2d.h"
 
 
 
 namespace Geo2d{
     // Constructor
-    Line2d::Line2d(const Point2d& start, const Point2d& end)
+    Line2d::Line2d(const Vector2d& start, const Vector2d& end)
         : m_start{start}
         , m_end{end}
     {
@@ -19,15 +19,15 @@ namespace Geo2d{
 
 
     // checks if two lines intersect
-    std::optional<Point2d> Line2d::intersects(const Line2d& other) const
+    std::optional<Vector2d> Line2d::intersects(const Line2d& other) const
     {
-        const Point2d& A = m_start;
-        const Point2d& B = m_end;
-        const Point2d& C = other.m_start;
-        const Point2d& D = other.m_end;
+        const Vector2d& A = m_start;
+        const Vector2d& B = m_end;
+        const Vector2d& C = other.m_start;
+        const Vector2d& D = other.m_end;
 
         // Orientation function
-        auto orientation = [](const Point2d& a, const Point2d& b, const Point2d& c) -> Orientation {
+        auto orientation = [](const Vector2d& a, const Vector2d& b, const Vector2d& c) -> Orientation {
             double val = (b.y - a.y) * (c.x - b.x) -
                         (b.x - a.x) * (c.y - b.y);
 
@@ -62,14 +62,14 @@ namespace Geo2d{
             double py = ((x1 * y2 - y1 * x2) * (y3 - y4) -
                         (y1 - y2) * (x3 * y4 - y3 * x4)) / denom;
 
-            return Point2d(px, py);
+            return Vector2d(px, py);
         }
 
         // no intersection
         return std::nullopt;
     }
     // static method to check if two lines intersect
-    std::optional<Point2d> Line2d::intersects(const Line2d& line1, const Line2d& line2) {
+    std::optional<Vector2d> Line2d::intersects(const Line2d& line1, const Line2d& line2) {
         return line1.intersects(line2);
     }
         
@@ -93,14 +93,14 @@ namespace Geo2d{
 
 
     // setter for start point
-    void Line2d::setStart(const Point2d& start) {
+    void Line2d::setStart(const Vector2d& start) {
         if (start == m_end) {
             throw std::invalid_argument("Start point cannot be the same as the end point");
         }
         m_start = start;
     }
     // setter for end point
-    void Line2d::setEnd(const Point2d& end) {
+    void Line2d::setEnd(const Vector2d& end) {
         if (end == m_start) {
             throw std::invalid_argument("Start point cannot be the same as the end point");
         }
