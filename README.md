@@ -35,7 +35,7 @@ include(FetchContent)
 
 FetchContent_Declare(  
 geometry2d  
-GIT_REPOSITORY [https://github.com/EmeraldDev52/2d-geometry.git](https://github.com/EmeraldDev52/2d-geometry.git)  
+GIT_REPOSITORY https://github.com/EmeraldDev52/2d-geometry.git
 GIT_TAG main  
 )
 
