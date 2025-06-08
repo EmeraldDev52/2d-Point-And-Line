@@ -21,6 +21,22 @@ add_subdirectory(path/to/2d-geometry)
 target_link_libraries(your_target PRIVATE geometry2d)
 # Replace 'your_target' below with the actual target name of your executable or library
 ```
+sample cmake
+```cmake
+cmake_minimum_required(VERSION 3.14)
+project(MyApp)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_subdirectory(2d-geometry)
+
+add_executable(myapp main.cpp)
+
+target_link_libraries(myapp PRIVATE geometry2d)
+```
+
+
 #### Step 3: Include headers in your source files like:  
 ```cpp
 #include <Geo2d/Vector2d.h>
