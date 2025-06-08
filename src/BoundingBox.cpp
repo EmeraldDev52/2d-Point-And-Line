@@ -1,5 +1,6 @@
 #include "../include/Geo2d/BoundingBox.h"
 #include "../include/Geo2d/Vector2d.h"
+#include <iostream>
 
 
 
@@ -8,7 +9,11 @@ namespace Geo2d{
     BoundingBox::BoundingBox(Vector2d tl, Vector2d br)
         : topLeft{tl}
         , bottomRight{br}
-    {}
+    {
+        if (tl.x > br.x || tl.y < br.y) {
+            throw std::invalid_argument("Top left must be higher and further left than bottom right");
+        }
+    }
 
 
     // checks if 2 bounding boxes overlap

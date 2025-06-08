@@ -13,10 +13,9 @@ namespace Geo2d{
     {
     private:
         std::vector<Vector2d> m_vertices;
-        double apothem;
 
     public:
-        Polygon(int sides, double apothem, Vector2d origin);// constructor
+        Polygon(int sides, double innerCircleRadius = 1, Vector2d origin = Vector2d::ZERO, double rotationOffset = 0);// constructor
 
 
         void print() const;// prints the vertices of the polygon
@@ -34,6 +33,9 @@ namespace Geo2d{
 
 
         double area() const; // returns the area of the polygon
+
+
+        Vector2d centroid() const;// returns the centroid (basically the center of mass) of the polygon
 
         
         BoundingBox getBoundingBox() const;// returns the bounding box of the polygon

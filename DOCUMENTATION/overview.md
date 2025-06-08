@@ -22,11 +22,13 @@
 ---
 ### Polygon
 ---
-Polygon is a regular polygon which is created by giving it
+Polygon is a polygon which is created by giving it
 
  1. an amount of sides(int)
  2. an apothem(radius of inner circle)(double)
  3. an origin(Vector2d)
+
+ by default, it is a regular polygon but you can set the points manually
 
  and has various helpful functions like
  `overlaps()` which returns whether 2 polygons overlap,

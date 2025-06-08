@@ -1,5 +1,6 @@
 #include "../include/Geo2d/Polygon.h"
 #define M_PI 3.14159265358979323846
+#define DEG2RAD (M_PI / 180.0)
 #include <cmath>
 #include <iostream>
 #include "../include/Geo2d/Vector2d.h"
@@ -9,27 +10,30 @@
 
 namespace Geo2d{
     //constructor
-    Polygon::Polygon(int sides, double radius, Vector2d origin)
+    Polygon::Polygon(int sides, double innerCircleRadius, Vector2d origin, double rotationOffset)
     {
         if (sides < 3) throw std::invalid_argument("Polygon must have at least 3 sides.");
+        m_vertices.reserve(sides);
 
+        double circumRadius = innerCircleRadius / std::cos(M_PI / sides);
         const double angleStep = 2 * M_PI / sides;
-        this->apothem = radius;
 
         for (int i = 0; i < sides; ++i)
         {
-            double angle = i * angleStep;
-            double x = radius * std::cos(angle);
-            double y = radius * std::sin(angle);
+            double angle = (i * angleStep) + (M_PI / sides) - rotationOffset * DEG2RAD;
+            double x = circumRadius * std::cos(angle);
+            double y = circumRadius * std::sin(angle);
             m_vertices.push_back(origin + Vector2d(x, y));
         }
     }
 
 
+
+
     //prints the vertices of the polygon
     void Polygon::print() const
     {
-        std::cout << "Regular Polygon with " << m_vertices.size() << " sides:\n";
+        std::cout << "Polygon with " << m_vertices.size() << " sides:\n";
         for (const auto& pt : m_vertices)
         {
             pt.print();
@@ -66,6 +70,9 @@ namespace Geo2d{
     bool Polygon::overlaps(const Polygon& other) const
     {
         if(!getBoundingBox().intersects(other.getBoundingBox())) return false;
+        if (this->contains(other.m_vertices[0]) || other.contains(this->m_vertices[0])) {
+            return true;
+        }
 
         auto lines1 = getLines();
         auto lines2 = other.getLines();
@@ -131,10 +138,44 @@ namespace Geo2d{
     }
 
 
+    // returns the centroid (basically the center of mass) of the polygon
+    Vector2d Polygon::centroid() const {
+        int n = this->m_vertices.size();
+        double cx = 0.0, cy = 0.0;
+        double area = 0.0;
+
+        for (int i = 0; i < n; ++i) {
+            const Vector2d& p1 = m_vertices[i];
+            const Vector2d& p2 = m_vertices[(i + 1) % n];
+            double cross = p1.x * p2.y - p2.x * p1.y;
+
+            area += cross;
+            cx += (p1.x + p2.x) * cross;
+            cy += (p1.y + p2.y) * cross;
+        }
+
+        area *= 0.5;
+        if (area == 0) return Vector2d(); // Prevent division by zero
+
+        cx /= (6.0 * area);
+        cy /= (6.0 * area);
+
+        return Vector2d(cx, cy);
+    }
+
+
     // returns the area of the polygon
     double Polygon::area() const {
-        double sideLength = (m_vertices[1] - m_vertices[0]).magnitude();
+        int n = this->m_vertices.size();
 
-        return ((sideLength * this->apothem * m_vertices.size())/2);
+        double area = 0.0;
+
+        for (size_t i = 0; i < n; ++i) {
+            const Vector2d& p1 = this->m_vertices[i];
+            const Vector2d& p2 = this->m_vertices[(i + 1) % n];
+            area += (p1.x * p2.y) - (p2.x * p1.y);
+        }
+
+        return std::abs(area) * 0.5;
     }
 }
