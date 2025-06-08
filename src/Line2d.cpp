@@ -2,7 +2,7 @@
 #include <iostream> 
 #include <optional> 
 #include "../include/Geo2d/Vector2d.h"
-#include "../include/Geo2d/Vector2d.h"
+
 
 
 

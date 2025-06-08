@@ -4,7 +4,6 @@
 #include <iostream>
 #include "../include/Geo2d/Vector2d.h"
 #include "../include/Geo2d/Line2d.h"
-#include "../include/Geo2d/Line2d.h"
 
 
 
@@ -15,6 +14,7 @@ namespace Geo2d{
         if (sides < 3) throw std::invalid_argument("Polygon must have at least 3 sides.");
 
         const double angleStep = 2 * M_PI / sides;
+        this->apothem = radius;
 
         for (int i = 0; i < sides; ++i)
         {
@@ -108,5 +108,33 @@ namespace Geo2d{
         }
 
         return BoundingBox(Vector2d(minX, maxY), Vector2d(maxX, minY));
+    }
+
+
+    // checks if a point is inside the polygon
+    bool Polygon::contains(const Vector2d& point) const {
+        int intersections = 0;
+
+        for (size_t i = 0; i < this->m_vertices.size(); ++i) {
+
+            const Vector2d& p1 = this->m_vertices[i];
+            const Vector2d& p2 = this->m_vertices[(i + 1) % this->m_vertices.size()];
+
+            // Check if the ray intersects with the current edge
+            if (((p1.y <= point.y && point.y < p2.y) || (p2.y <= point.y && point.y < p1.y)) &&
+                point.x < (p2.x - p1.x) * (point.y - p1.y) / (p2.y - p1.y) + p1.x) {
+                intersections++;
+            }
+        }
+
+        return intersections % 2 != 0;
+    }
+
+
+    // returns the area of the polygon
+    double Polygon::area() const {
+        double sideLength = (m_vertices[1] - m_vertices[0]).magnitude();
+
+        return ((sideLength * this->apothem * m_vertices.size())/2);
     }
 }

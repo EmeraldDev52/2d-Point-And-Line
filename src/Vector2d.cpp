@@ -38,14 +38,59 @@ namespace Geo2d{
 
 
     // returns the distance between two vectors
-    double Vector2d::distance(const Vector2d& v2) const {
-        return std::hypot(this->x - v2.x, this->y - v2.y);
+    double Vector2d::distance(const Vector2d& other) const {
+        return std::hypot(this->x - other.x, this->y - other.y);
+    }
+    // static method that returns the distance between two vectors
+    double Vector2d::distance(const Vector2d& v1, const Vector2d& v2) {
+        return v1.distance(v2);
+    }
+
+
+    // returns the dot product of two vectors
+    double Vector2d::dot(const Vector2d& other) const {
+        return this->x * other.x + this->y * other.y;
+    }
+    // static method that returns the dot product of two vectors 
+    double Vector2d::dot(const Vector2d& v1, const Vector2d& v2) {
+        return v1.dot(v2);
+    }
+
+
+    // returns the cross product of two vectors
+    double Vector2d::cross(const Vector2d& other) const {
+        return this->x * other.y - this->y * other.x;
+    }
+    // static method that returns the cross product of the two vectors
+    double Vector2d::cross(const Vector2d& v1, const Vector2d& v2) {
+        return v1.cross(v2);
+    }
+
+
+    // returns the angle between two vectors IN RADIANS
+    double Vector2d::angleBetween(const Vector2d& other) const {
+        double dotProd = this->dot(other);
+        double magProduct = this->magnitude() * other.magnitude();
+
+        // Protect against division by zero or floating point errors
+        if (magProduct == 0) return 0.0;
+
+        double cosTheta = dotProd / magProduct;
+
+        // Clamp value between -1 and 1 to avoid errors
+        if (cosTheta > 1.0) cosTheta = 1.0;
+        if (cosTheta < -1.0) cosTheta = -1.0;
+
+        return std::acos(cosTheta); // returns angle in radians
+    }
+    // static method that returns the angle between two vectors
+    double Vector2d::angleBetween(const Vector2d& v1, const Vector2d& v2) {
+        return v1.angleBetween(v2);
     }
 
 
     // prints the position of the points
-    void Vector2d::print() const
-    { 
+    void Vector2d::print() const{ 
         std::cout << "Vector2d: " << this->x << ", " << this->y << std::endl;
     }
 

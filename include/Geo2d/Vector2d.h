@@ -26,8 +26,21 @@ namespace Geo2d{
         bool operator!=(const Vector2d& other) const;
 
 
-        // returns the distance between two vectors
-        double distance(const Vector2d& v2) const;
+
+        double distance(const Vector2d& other) const;// returns the distance between two vectors
+        static double distance(const Vector2d& v1, const Vector2d& other);// static method that returns the distance between two vectors
+
+
+        double dot(const Vector2d& other) const;// returns the dot product of two vectors
+        static double dot(const Vector2d& v1, const Vector2d& v2);// static method that returns the dot product of two vectors
+
+
+        double cross(const Vector2d& other) const;// returns the cross product of two vectors
+        static double cross(const Vector2d& v1, const Vector2d& v2);// static method that returns the cross product of two vectors
+
+
+        double angleBetween(const Vector2d& other) const;// static method that returns the angle between two vectors
+        static double angleBetween(const Vector2d& v1, const Vector2d& v2);// static method that returns the angle between two vectors
 
 
         double magnitude() const;// returns the magnitude(length) of the vector
