@@ -21,7 +21,7 @@ add_subdirectory(path/to/2d-geometry)
 target_link_libraries(your_target PRIVATE geometry2d)
 # Replace 'your_target' below with the actual target name of your executable or library
 ```
-sample cmake and main.cpp
+sample cmake and main.cpp (assuming the github repo was cloned in the same directory as your main.cpp and CMakelists.txt)
 ```cmake
 cmake_minimum_required(VERSION 3.14)
 project(MyApp)
