@@ -41,7 +41,7 @@ target_link_libraries(myapp PRIVATE geometry2d)
 
 int main(){
     Vector2d v1(5, 3);
-    Vector2d v2(4.3, 2.43)
+    Vector2d v2(4.3, 2.43);
     std::cout << v1.distance(v2) << std::endl;
 }
 ```
