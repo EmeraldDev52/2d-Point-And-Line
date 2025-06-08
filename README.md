@@ -1,27 +1,17 @@
 ## Geometry2d
 
-A small, header‑only C++ library for 2D geometry (vectors, lines, polygons, and more).
+A small C++ library for 2D geometry (vectors, lines, polygons, and more).
 
 ---
 
-### 🚀 Features
-
-* **Header‑only**: Just include the headers—no library build required.
-* **Modern C++17**: Utilizes `std::optional`, `constexpr`, and template-based designs.
-* **Zero dependencies**: No external dependencies beyond the C++ standard library.
-* **Customizable**: Configure and disable tests or examples via CMake options.
-
----
-
-### 🎯 Requirements
+### Requirements
 
 * CMake ≥ 3.14 (for CPM.cmake support)
-* Git
 * A C++17‑compatible compiler (GCC, Clang, MSVC)
 
 ---
 
-## 📥 Installation Options
+## Installation Options
 
 Choose the method that best fits your workflow.
 
