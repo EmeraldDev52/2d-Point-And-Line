@@ -1,6 +1,6 @@
 # Geometry2d
 
-A small C++ static library for 2D geometry (vectors, lines, polygons, etc.).
+A small, header‑only C++ static library for 2D geometry (vectors, lines, polygons, etc.).
 
 ---
 
@@ -29,7 +29,7 @@ include(FetchContent)
 FetchContent_Declare(
   CPM
   GIT_REPOSITORY https://github.com/cpm-cmake/CPM.cmake.git
-  GIT_TAG        origin/master
+  GIT_TAG        origin/main
 )
 FetchContent_MakeAvailable(CPM)
 
