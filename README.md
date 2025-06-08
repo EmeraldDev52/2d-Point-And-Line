@@ -53,7 +53,8 @@ target_link_libraries(my_app PRIVATE Geo2d::geometry2d)
 Include in code:
 
 ```cpp
-#include <Geo2d/Vector2d.h>
+#include "Geo2d/Vector2d.h"
+// or any other header from the lib
 ```
 
 ---
@@ -87,7 +88,8 @@ target_link_libraries(my_app PRIVATE Geo2d::geometry2d)
 Include in code:
 
 ```cpp
-#include <Geo2d/Vector2d.h>
+#include "Geo2d/Vector2d.h"
+// or any other header from the lib
 ```
 
 ---
@@ -121,7 +123,8 @@ Include in code:
 Include in code:
 
 ```cpp
-#include <Geo2d/Vector2d.h>
+#include "Geo2d/Vector2d.h"
+// or any other header from the lib
 ```
 
 ---
@@ -130,7 +133,8 @@ Include in code:
 
 ```cpp
 #include <iostream>
-#include <Geo2d/Vector2d.h>
+#include "Geo2d/Vector2d.h"
+// or any other header from the lib
 
 int main() {
     Geo2d::Vector2d v1{3.0, 4.0};
