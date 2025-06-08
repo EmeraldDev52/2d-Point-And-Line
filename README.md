@@ -14,8 +14,6 @@ A small, header‑only C++ static library for 2D geometry (vectors, lines, polyg
 
 ## How to Use
 
-Choose one of the following simple options.
-
 ### Option 1: Recommended – Pull via CPM.cmake
 
 Add the snippet below to **your** `CMakeLists.txt`. CPM.cmake will clone, configure, and add Geometry2d automatically.
