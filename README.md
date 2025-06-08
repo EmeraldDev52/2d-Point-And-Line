@@ -24,7 +24,7 @@ Add the snippet below to **your** `CMakeLists.txt`. CPM.cmake will clone, config
 cmake_minimum_required(VERSION 3.14)
 project(my_project LANGUAGES CXX)
 
-# Bootstrap CPM.cmake
+
 include(FetchContent)
 FetchContent_Declare(
   CPM
@@ -33,7 +33,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(CPM)
 
-# Pull in geometry2d
 CPMAddPackage(
   NAME geometry2d
   GITHUB_REPOSITORY EmeraldDev52/2d-geometry
