@@ -19,6 +19,7 @@ Choose the method that best fits your workflow.
 
 Automatically download and use CPM.cmake at configure time.
 
+just drop this in with no other downloads required (other than cmake obv)
 
 example CMakeLists.txt
 ```cmake
