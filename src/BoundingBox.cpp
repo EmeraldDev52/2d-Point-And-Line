@@ -6,8 +6,8 @@
 namespace Geo2d{
     // constructor
     BoundingBox::BoundingBox(Vector2d tl, Vector2d br)
-        : topLeft{topLeft}
-        , bottomRight{bottomRight}
+        : topLeft{tl}
+        , bottomRight{br}
     {}
 
 

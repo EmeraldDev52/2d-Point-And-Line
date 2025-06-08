@@ -8,7 +8,7 @@ namespace Geo2d{
     // BoundingBox struct
     struct BoundingBox
     {
-        Vector2d topLeft, bottomRight;
+        Vector2d topLeft{Vector2d(0, 0)}, bottomRight{Vector2d(0, 0)};
 
 
         BoundingBox(Vector2d tl, Vector2d br);// constructor
