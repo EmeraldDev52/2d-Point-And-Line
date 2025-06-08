@@ -67,6 +67,7 @@ Clone into your project and use CMake’s `add_subdirectory`.
 ```bash
 git clone https://github.com/EmeraldDev52/2d-geometry.git path/to/geometry2d
 ```
+or you can just download the repo as a zip and extract it into your project
 
 In your `CMakeLists.txt`:
 
