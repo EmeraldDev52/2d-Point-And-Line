@@ -22,7 +22,7 @@ Add the snippet below to **your** `CMakeLists.txt`. CPM.cmake will clone, config
 cmake_minimum_required(VERSION 3.14)
 project(my_project LANGUAGES CXX)
 
-
+# ------- THIS IS THE IMPORTANT PART THAT YOU NEED TO ADD
 include(FetchContent)
 FetchContent_Declare(
   CPM
@@ -36,6 +36,7 @@ CPMAddPackage(
   GITHUB_REPOSITORY EmeraldDev52/2d-geometry
   GIT_TAG main
 )
+# ------- END OF IMPORTANT PART
 
 add_executable(my_app src/main.cpp)
 target_link_libraries(my_app PRIVATE geometry2d)
