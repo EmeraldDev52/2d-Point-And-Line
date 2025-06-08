@@ -5,8 +5,9 @@
 
 namespace Geo2d{
     // Vector2d struct
-    struct Vector2d
+    class Vector2d
     {
+    public:
         double x{0.0};
         double y{0.0};
 
