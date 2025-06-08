@@ -7,7 +7,7 @@ A small C++ library for 2D geometry (vectors, lines, polygons, and more).
 ### Requirements
 
 * CMake ≥ 3.14 (for CPM.cmake support)
-* A C++17‑compatible compiler (GCC, Clang, MSVC)
+* A C++ compiler (GCC, Clang, MSVC)
 
 ---
 
