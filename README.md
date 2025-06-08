@@ -1,6 +1,6 @@
 # Geometry2d
 
-A small, header‑only C++ static library for 2D geometry (vectors, lines, polygons, etc.).
+A small C++ static library for 2D geometry (vectors, lines, polygons, etc.).
 
 ---
 
