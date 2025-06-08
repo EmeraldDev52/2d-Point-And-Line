@@ -1,88 +1,101 @@
-# NOTE: THIS IS MY FIRST TIME USING A BUILD SYSTEM SO IT MAY NOT WORK AS THE INSTRUCTIONS SAY
 # Geometry2d
 
-### A small C++ static library for 2D geometry (vectors, lines, polygons, etc).
+A small, header‑only C++ static library for 2D geometry (vectors, lines, polygons, etc.).
 
-----------
-
-## How to Use
-
-### Option 1: Add as a subdirectory (recommended for CMake projects)
-
-#### Step 1: Clone the repo inside your project folder (or anywhere you want): 
-```bash 
-git clone https://github.com/EmeraldDev52/2d-geometry.git
-```
-#### Step 2: In your project's CMakeLists.txt, add:  
-```cmake
-add_subdirectory(path/to/2d-geometry) 
-```
-```cmake 
-target_link_libraries(your_target PRIVATE geometry2d)
-# Replace 'your_target' below with the actual target name of your executable or library
-```
-#### Step 3: Include headers in your source files like:  
-```cpp
-#include <Geo2d/Vector2d.h>
-```
-----------
-
-### Option 2: Install and use with find_package
-
-#### Step 1: Build and install the library:  
-```bash
-mkdir build
-cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=/your/install/path
-cmake --build .
-cmake --install .
-```
-#### Step 2: In your own project, find and link the library: 
-```cmake 
-find_package(geometry2d REQUIRED PATHS /path/to/install)  
-target_link_libraries(your_target PRIVATE Geo2d::geometry2d)
-```
-#### Step 3: Include headers as usual:  
-```cpp
-#include <Geo2d/Vector2d.h>
-```
-----------
-
-### Option 3: Use in non-CMake projects (after building with CMake)
-
-#### Step 1: Build the library with CMake:  
-```bash
-mkdir build  
-cd build  
-cmake .. -DCMAKE_BUILD_TYPE=Release  
-cmake --build .
-```
-
-This will create a static library:  
-On Linux/macOS: build/libgeometry2d.a  
-On Windows: build/geometry2d.lib
-
-#### Step 2: Compile your project using any compiler and link to the library
-
-For g++ or clang++:  
-g++ -std=c++17 -I/path/to/geometry2d/include main.cpp -L/path/to/geometry2d/build -lgeometry2d
-
-For MSVC (Windows):  
-cl /std:c++17 /I path\to\geometry2d\include main.cpp path\to\geometry2d\build\geometry2d.lib
-
-#### Step 3: Include headers like this in your code:  
-```cpp
-#include <Geo2d/Vector2d.h>
-```
-Make sure you use the correct include path and link against the built library file.
-
-----------
+---
 
 ## Requirements
 
--   CMake 3.10 or higher
-    
--   C++17 compatible compiler
-    
+* CMake ≥ 3.14 (for FetchContent)
+* Git
+* A C++17‑compatible compiler (GCC, Clang, MSVC)
 
-----------
+---
+
+## How to Use
+
+Choose one of the following simple options.
+
+### Option 1: Recommended – Pull via CPM.cmake
+
+Add the snippet below to **your** `CMakeLists.txt`. CPM.cmake will clone, configure, and add Geometry2d automatically.
+
+```cmake
+cmake_minimum_required(VERSION 3.14)
+project(my_project LANGUAGES CXX)
+
+# Bootstrap CPM.cmake
+include(FetchContent)
+FetchContent_Declare(
+  CPM
+  GIT_REPOSITORY https://github.com/cpm-cmake/CPM.cmake.git
+  GIT_TAG        origin/master
+)
+FetchContent_MakeAvailable(CPM)
+
+# Pull in geometry2d
+CPMAddPackage(
+  NAME geometry2d
+  GITHUB_REPOSITORY EmeraldDev52/2d-geometry
+  GIT_TAG main
+)
+
+add_executable(my_app src/main.cpp)
+target_link_libraries(my_app PRIVATE geometry2d)
+```
+
+Include headers in your code as:
+
+```cpp
+#include <Geo2d/Vector2d.h>
+```
+
+---
+
+### Option 2: Add as a Subdirectory
+
+Clone this repo and link it directly.
+
+```bash
+git clone https://github.com/EmeraldDev52/2d-geometry.git path/to/geometry2d
+```
+
+In **your** `CMakeLists.txt`:
+
+```cmake
+cmake_minimum_required(VERSION 3.10)
+project(my_project LANGUAGES CXX)
+
+add_subdirectory(path/to/geometry2d)
+
+add_executable(my_app src/main.cpp)
+target_link_libraries(my_app PRIVATE geometry2d)
+```
+
+Include headers as above.
+
+---
+
+### Option 3: Install & Find via `find_package`
+
+1. **Build & install Geometry2d**:
+
+   ```bash
+   mkdir build && cd build
+   cmake .. -DCMAKE_INSTALL_PREFIX=/your/install/path
+   cmake --build .
+   cmake --install .
+   ```
+2. **In your project**:
+
+   ```cmake
+   find_package(geometry2d CONFIG REQUIRED
+                PATHS /your/install/path/lib/cmake/geometry2d)
+   add_executable(my_app src/main.cpp)
+   target_link_libraries(my_app PRIVATE geometry2d)
+   ```
+
+Include headers as above.
+
+---
+
