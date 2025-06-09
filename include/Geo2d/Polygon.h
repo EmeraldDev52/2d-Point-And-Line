@@ -25,7 +25,7 @@ namespace Geo2d{
         std::vector<Line2d> getLines() const;// returns the lines between adjascent vertices of the polygon
 
 
-        void Polygon::setVertices(const std::vector<Vector2d>& newVerts); 
+        void setVertices(const std::vector<Vector2d>& newVerts); 
 
 
         bool overlaps(const Polygon& other) const;// checks if two polygons overlap
