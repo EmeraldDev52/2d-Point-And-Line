@@ -15,7 +15,7 @@ namespace Geo2d{
         std::vector<Vector2d> m_vertices;
 
     public:
-        Polygon(int sides, double innerCircleRadius = 1, Vector2d origin = Vector2d::ZERO, double rotationOffset = 0);// constructor
+        Polygon(int sides, double innerCircleRadius = 1, Vector2d origin = Vector2d::ZERO, Vector2d scale = Vector2d::ONE, double rotationOffset = 0);// constructor
 
 
         void print() const;// prints the vertices of the polygon

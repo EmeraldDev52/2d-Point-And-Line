@@ -10,7 +10,7 @@
 
 namespace Geo2d{
     //constructor
-    Polygon::Polygon(int sides, double innerCircleRadius, Vector2d origin, double rotationOffset)
+    Polygon::Polygon(int sides, double innerCircleRadius, Vector2d origin, Vector2d scale, double rotationOffset)
     {
         if (sides < 3) throw std::invalid_argument("Polygon must have at least 3 sides.");
         m_vertices.reserve(sides);
@@ -21,8 +21,8 @@ namespace Geo2d{
         for (int i = 0; i < sides; ++i)
         {
             double angle = (i * angleStep) + (M_PI / sides) - rotationOffset * DEG2RAD;
-            double x = circumRadius * std::cos(angle);
-            double y = circumRadius * std::sin(angle);
+            double x = circumRadius * std::cos(angle) * scale.x;
+            double y = circumRadius * std::sin(angle) * scale.y;
             m_vertices.push_back(origin + Vector2d(x, y));
         }
     }

@@ -61,5 +61,6 @@ namespace Geo2d{
         static const Vector2d DOWN;
         static const Vector2d LEFT;
         static const Vector2d RIGHT;
+        static const Vector2d ONE;
     };
 }
