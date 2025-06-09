@@ -34,16 +34,3 @@ install(EXPORT geometry2dTargets
     NAMESPACE Geo2d::
     DESTINATION lib/cmake/geometry2d
 )
-
-add_executable(myapp )
-
-target_link_libraries(myapp PRIVATE geometry2d)
-
-target_include_directories(myapp PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-
-set_target_properties(myapp PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED ON
-)
