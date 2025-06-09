@@ -28,8 +28,6 @@ namespace Geo2d{
     }
 
 
-
-
     //prints the vertices of the polygon
     void Polygon::print() const
     {
@@ -63,6 +61,14 @@ namespace Geo2d{
         }
 
         return lines;
+    }
+
+
+    // sets the vertices of the polygon
+    // In Polygon.h & Polygon.cpp
+    void Polygon::setVertices(const std::vector<Vector2d>& newVerts) {
+        if (newVerts.size() < 3) throw std::invalid_argument("Polygon must have at least 3 sides.");
+        m_vertices = newVerts;
     }
 
 
