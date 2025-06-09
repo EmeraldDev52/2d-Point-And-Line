@@ -27,7 +27,7 @@ namespace Geo2d{
 
             // apply scale then translate to origin
             Vector2d scaled = Vector2d(x * scale.x, y * scale.y);
-            m_vertices.push_back(origin + scaled);
+            m_vertices.emplace_back(origin + scaled);
         }
 
 
