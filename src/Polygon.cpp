@@ -21,10 +21,11 @@ namespace Geo2d{
         for (int i = 0; i < sides; ++i)
         {
             double angle = (i * angleStep) + (M_PI / sides) - rotationOffset * DEG2RAD;
-            double x = circumRadius * std::cos(angle) * scale.x;
-            double y = circumRadius * std::sin(angle) * scale.y;
-            m_vertices.push_back(origin + Vector2d(x, y));
+            double x = origin.x + scale.x * circumRadius * std::cos(angle);
+            double y = origin.y + scale.y * circumRadius * std::sin(angle);
+            m_vertices.push_back(Vector2d(x, y));
         }
+
     }
 
 
