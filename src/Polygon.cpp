@@ -27,7 +27,10 @@ namespace Geo2d{
             const double y = circumRadius * std::sin(angle) * scale.y;
 
             m_vertices.push_back(origin + Vector2d(x, y));
+
         }
+
+
     }
 
     //prints the vertices of the polygon
