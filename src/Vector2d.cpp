@@ -1,5 +1,5 @@
 #include "../include/Geo2d/Vector2d.h"
-#include "../include/Geo2d/OrientationEnum.h"
+#include <stdexcept>
 #include <iostream>
 #include <cmath>
 
@@ -20,6 +20,7 @@ namespace Geo2d{
     Vector2d Vector2d::operator-(const Vector2d& other) const{
         return Vector2d(this->x - other.x, this->y - other.y);
     }
+
     Vector2d Vector2d::operator*(double scalar) const{
         return Vector2d(this->x * scalar, this->y * scalar);
     }
@@ -29,8 +30,12 @@ namespace Geo2d{
         }
         return Vector2d(this->x / scalar, this->y / scalar);
     }
-    bool Vector2d::operator==(const Vector2d& other) const{
-        return ((this->x == other.x) && (this->y == other.y));
+
+
+
+    bool Vector2d::operator==(const Vector2d& other) const {
+        constexpr double EPS = 1e-9;
+        return std::abs(x - other.x) < EPS && std::abs(y - other.y) < EPS;
     }
     bool Vector2d::operator!=(const Vector2d& other) const{
         return !(*this == other); 
@@ -114,10 +119,10 @@ namespace Geo2d{
 
 
     //CONSTS
-    const Vector2d Vector2d::ZERO = Vector2d(0.0, 0.0);
-    const Vector2d Vector2d::UP = Vector2d(0.0, 1.0);
-    const Vector2d Vector2d::DOWN = Vector2d(0.0, -1.0);
-    const Vector2d Vector2d::LEFT = Vector2d(-1.0, 0.0);
-    const Vector2d Vector2d::RIGHT = Vector2d(1.0, 0.0);
-    const Vector2d Vector2d::ONE = Vector2d(1, 1);
+    const Vector2d Vector2d::ZERO{ 0.0, 0.0 };
+    const Vector2d Vector2d::UP{ 0.0, 1.0 };
+    const Vector2d Vector2d::DOWN{ 0.0, -1.0 };
+    const Vector2d Vector2d::LEFT{ -1.0, 0.0 };
+    const Vector2d Vector2d::RIGHT{ 1.0, 0.0 };
+    const Vector2d Vector2d::ONE{ 1.0, 1.0 };
 }

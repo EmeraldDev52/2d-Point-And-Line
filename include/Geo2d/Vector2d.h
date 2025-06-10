@@ -1,7 +1,5 @@
 #pragma once
-#include "orientationEnum.h"
-
-
+#include <stdexcept>
 
 namespace Geo2d{
     // Vector2d struct
@@ -13,18 +11,38 @@ namespace Geo2d{
 
         
 
-        Vector2d() = default;// default constructor
-        Vector2d(double x, double y);// constructor
+        constexpr Vector2d() = default;// default constructor
+        constexpr Vector2d(double x, double y) : x(x), y(y) {}// constructor
 
 
         //operator overloads
-        Vector2d operator+(const Vector2d& other) const;
-        Vector2d operator-(const Vector2d& other) const;
-        Vector2d operator*(double scalar) const;
-        Vector2d operator/(double scalar) const;
-        bool operator==(const Vector2d& other) const;
-        bool operator!=(const Vector2d& other) const;
+        inline Vector2d operator+(const Vector2d& other) const { return Vector2d(x + other.x, y + other.y); }
+        inline Vector2d operator-(const Vector2d& other) const { return Vector2d(x - other.x, y - other.y); }
 
+
+        inline Vector2d operator*(double scalar) const { return Vector2d(x * scalar, y * scalar); }
+        inline friend Vector2d operator*(double s, const Vector2d& v) { return Vector2d(v.x * s, v.y * s); }
+
+
+        inline Vector2d operator/(double scalar) const {
+            if (scalar == 0.0) throw std::invalid_argument("Division by zero");
+
+            return Vector2d(x / scalar, y / scalar); 
+        }
+        inline friend Vector2d operator/(double scalar, const Vector2d& v) {
+            constexpr double epsilon = 1e-9;
+            if (std::abs(v.x) < epsilon || std::abs(v.y) < epsilon)
+                throw std::invalid_argument("Division by zero component in vector");
+
+            return Vector2d(scalar / v.x, scalar / v.y); 
+        }
+
+
+        inline bool operator==(const Vector2d& other) const {
+            constexpr double epsilon = 1e-9;
+            return std::abs(x - other.x) < epsilon && std::abs(y - other.y) < epsilon;
+        }
+        inline bool operator!=(const Vector2d& other) const { return !(*this == other); }
 
 
         double distance(const Vector2d& other) const;// returns the distance between two vectors

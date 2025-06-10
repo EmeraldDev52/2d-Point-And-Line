@@ -120,17 +120,18 @@ namespace Geo2d{
     {
         const std::vector<Vector2d>& verts = this->m_vertices;
 
-        Vector2d tl;
-        Vector2d br;
+        Vector2d tl = verts[0];
+        Vector2d br = verts[0];
 
         for (const Vector2d& p : verts)
         {
-            if (p.x < br.x) br.x = p.x;
-            if (p.x > tl.x) tl.x = p.x;
+            if (p.x < tl.x) tl.x = p.x;
+            if (p.x > br.x) br.x = p.x;
 
-            if (p.y < br.y) br.y = p.y;
-            if (p.y > tl.y) tl.y = p.y;
+            if (p.y < tl.y) tl.y = p.y;
+            if (p.y > br.y) br.y = p.y;
         }
+
 
         return BoundingBox(tl, br);
     }
@@ -161,7 +162,7 @@ namespace Geo2d{
     // returns the centroid (basically the center of mass) of the polygon
     Vector2d Polygon::centroid() const {
 
-        const std::vector<Vector2d> verts = this->m_vertices;
+        const std::vector<Vector2d>& verts = this->m_vertices;
 
         int vertSize = verts.size();
         
