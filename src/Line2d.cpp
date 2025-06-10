@@ -23,6 +23,7 @@ namespace Geo2d{
     {
         const Vector2d& A = m_start;
         const Vector2d& B = m_end;
+
         const Vector2d& C = other.m_start;
         const Vector2d& D = other.m_end;
 
@@ -44,12 +45,12 @@ namespace Geo2d{
         // general case: lines intersect if orientations differ
         if (o1 != o2 && o3 != o4) {
             // calculate actual intersection point using line-line intersection math
-            double x1 = A.x, y1 = A.y;
-            double x2 = B.x, y2 = B.y;
-            double x3 = C.x, y3 = C.y;
-            double x4 = D.x, y4 = D.y;
+            const double& x1 = A.x, y1 = A.y;
+            const double& x2 = B.x, y2 = B.y;
+            const double& x3 = C.x, y3 = C.y;
+            const double& x4 = D.x, y4 = D.y;
 
-            double denom = (x1 - x2) * (y3 - y4) - 
+            const double denom = (x1 - x2) * (y3 - y4) - 
                         (y1 - y2) * (x3 - x4);
 
             if (denom == 0.0){

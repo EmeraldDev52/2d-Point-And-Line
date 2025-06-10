@@ -22,11 +22,14 @@
 ---
 ### Polygon
 ---
-Polygon is a polygon which is created by giving it
+Polygon is a polygon which is created by giving it 
+int sides, double innerCircleRadius = 1, Vector2d origin = Vector2d::ZERO, Vector2d scale = Vector2d::ONE, double rotationOffset = 0
 
  1. an amount of sides(int)
- 2. an apothem(radius of inner circle)(double)
- 3. an origin(Vector2d)
+ 2. a radius of inner circle(double) (optional, default = 1)
+ 3. an origin(Vector2d) (optional, default = Vector2d::ZERO)
+ 4. a scale(Vector2d) (optional, default = Vector2d::ONE) (a Vector2d that stretches the polygon)
+ 5. a rotation offset(double) (optional, default = 0) (rotates the polygon clockwise (degrees)) 
 
  by default, it is a regular polygon but you can set the points manually
 

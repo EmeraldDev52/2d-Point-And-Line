@@ -13,26 +13,28 @@ namespace Geo2d{
     Polygon::Polygon(int sides, double innerCircleRadius, Vector2d origin, Vector2d scale, double rotationOffset)
     {
         if (sides < 3) throw std::invalid_argument("Polygon must have at least 3 sides.");
+
         m_vertices.reserve(sides);
 
-        double circumRadius = innerCircleRadius / std::cos(M_PI / sides);
+        const double circumRadius = innerCircleRadius / std::cos(M_PI / sides);
         const double angleStep = 2 * M_PI / sides;
 
         for (int i = 0; i < sides; ++i)
         {
-            double angle = (i * angleStep) + (M_PI / sides) - rotationOffset * DEG2RAD;
-            double x = circumRadius * std::cos(angle) * scale.x;
-            double y = circumRadius * std::sin(angle) * scale.y;
+            const double angle = (i * angleStep) + (M_PI / sides) - rotationOffset * DEG2RAD;
+
+            const double x = circumRadius * std::cos(angle) * scale.x;
+            const double y = circumRadius * std::sin(angle) * scale.y;
+
             m_vertices.push_back(origin + Vector2d(x, y));
         }
     }
-
 
     //prints the vertices of the polygon
     void Polygon::print() const
     {
         std::cout << "Polygon with " << m_vertices.size() << " sides:\n";
-        for (const auto& pt : m_vertices)
+        for (const Vector2d& pt : m_vertices)
         {
             pt.print();
         }
@@ -49,14 +51,18 @@ namespace Geo2d{
     //return the lines of the polygon
     std::vector<Line2d> Polygon::getLines() const
     {
+
+        size_t vertCount = m_vertices.size();
+
         std::vector<Line2d> lines;
-        size_t n = m_vertices.size();
+        lines.reserve(vertCount);
+
 
         // loops through the vertices and returns the lines between adjascent vertices
-        for (size_t i = 0; i < n; ++i)
+        for (size_t i = 0; i < vertCount; ++i)
         {
             const Vector2d& start = m_vertices[i];
-            const Vector2d& end = m_vertices[(i + 1) % n];
+            const Vector2d& end = m_vertices[(i + 1) % vertCount];
             lines.emplace_back(start, end);
         }
 
@@ -66,7 +72,10 @@ namespace Geo2d{
 
     // sets the vertices of the polygon
     void Polygon::setVertices(const std::vector<Vector2d>& newVerts) {
-        if (newVerts.size() < 3) throw std::invalid_argument("Polygon must have at least 3 sides.");
+
+        if (newVerts.size() < 3) {
+            throw std::invalid_argument("Polygon must have at least 3 sides.");
+        }
         m_vertices = newVerts;
     }
 
@@ -75,15 +84,17 @@ namespace Geo2d{
     bool Polygon::overlaps(const Polygon& other) const
     {
         if(!getBoundingBox().intersects(other.getBoundingBox())) return false;
+
         if (this->contains(other.m_vertices[0]) || other.contains(this->m_vertices[0])) {
             return true;
         }
 
-        auto lines1 = getLines();
-        auto lines2 = other.getLines();
-        for (const auto& line1 : lines1)
+        const std::vector<Line2d> lines1 = getLines();
+        const std::vector<Line2d> lines2= other.getLines();
+
+        for (const Line2d& line1 : lines1)
         {
-            for (const auto& line2 : lines2)
+            for (const Line2d& line2 : lines2)
             {
                 if (line1.intersects(line2).has_value())
                 {
@@ -104,22 +115,21 @@ namespace Geo2d{
     // returns the bounding box of the polygon
     BoundingBox Polygon::getBoundingBox() const
     {
-        const auto& verts = getVertices();
+        const std::vector<Vector2d>& verts = this->m_vertices;
 
-        double minX = verts[0].x;
-        double maxX = verts[0].x;
-        double minY = verts[0].y;
-        double maxY = verts[0].y;
+        Vector2d tl;
+        Vector2d br;
 
-        for (const auto& p : verts)
+        for (const Vector2d& p : verts)
         {
-            if (p.x < minX) minX = p.x;
-            if (p.x > maxX) maxX = p.x;
-            if (p.y < minY) minY = p.y;
-            if (p.y > maxY) maxY = p.y;
+            if (p.x < br.x) br.x = p.x;
+            if (p.x > tl.x) tl.x = p.x;
+
+            if (p.y < br.y) br.y = p.y;
+            if (p.y > tl.y) tl.y = p.y;
         }
 
-        return BoundingBox(Vector2d(minX, maxY), Vector2d(maxX, minY));
+        return BoundingBox(tl, br);
     }
 
 
@@ -127,10 +137,12 @@ namespace Geo2d{
     bool Polygon::contains(const Vector2d& point) const {
         int intersections = 0;
 
-        for (size_t i = 0; i < this->m_vertices.size(); ++i) {
+        const std::vector<Vector2d>& verts = this->m_vertices;
 
-            const Vector2d& p1 = this->m_vertices[i];
-            const Vector2d& p2 = this->m_vertices[(i + 1) % this->m_vertices.size()];
+        for (size_t i = 0; i < verts.size(); ++i) {
+
+            const Vector2d& p1 = verts[i];
+            const Vector2d& p2 = verts[(i + 1) % verts.size()];
 
             // Check if the ray intersects with the current edge
             if (((p1.y <= point.y && point.y < p2.y) || (p2.y <= point.y && point.y < p1.y)) &&
@@ -145,14 +157,18 @@ namespace Geo2d{
 
     // returns the centroid (basically the center of mass) of the polygon
     Vector2d Polygon::centroid() const {
-        int n = this->m_vertices.size();
+
+        const std::vector<Vector2d> verts = this->m_vertices;
+
+        int vertSize = verts.size();
+        
         double cx = 0.0, cy = 0.0;
         double area = 0.0;
 
-        for (int i = 0; i < n; ++i) {
-            const Vector2d& p1 = m_vertices[i];
-            const Vector2d& p2 = m_vertices[(i + 1) % n];
-            double cross = p1.x * p2.y - p2.x * p1.y;
+        for (int i = 0; i < vertSize; ++i) {
+            const Vector2d& p1 = verts[i];
+            const Vector2d& p2 = verts[(i + 1) % vertSize];
+            const double cross = p1.x * p2.y - p2.x * p1.y;
 
             area += cross;
             cx += (p1.x + p2.x) * cross;
@@ -160,7 +176,10 @@ namespace Geo2d{
         }
 
         area *= 0.5;
-        if (area == 0) return Vector2d(); // Prevent division by zero
+
+        if (area == 0) {
+            return Vector2d(); // Prevent division by zero
+        }
 
         cx /= (6.0 * area);
         cy /= (6.0 * area);
@@ -171,14 +190,18 @@ namespace Geo2d{
 
     // returns the area of the polygon
     double Polygon::area() const {
-        int n = this->m_vertices.size();
+
+        const std::vector<Vector2d>& verts = this->m_vertices;
+
+        int vertSize = verts.size();
 
         double area = 0.0;
 
-        for (size_t i = 0; i < n; ++i) {
-            const Vector2d& p1 = this->m_vertices[i];
-            const Vector2d& p2 = this->m_vertices[(i + 1) % n];
-            area += (p1.x * p2.y) - (p2.x * p1.y);
+        for (size_t i = 0; i < vertSize; ++i) {
+
+            const Vector2d& p1 = verts[i];
+            const Vector2d& p2 = verts[(i + 1) % vertSize];
+            area += Vector2d::cross(p1, p2);
         }
 
         return std::abs(area) * 0.5;

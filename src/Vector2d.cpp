@@ -49,7 +49,7 @@ namespace Geo2d{
 
     // returns the dot product of two vectors
     double Vector2d::dot(const Vector2d& other) const {
-        return this->x * other.x + this->y * other.y;
+        return (this->x * other.x) + (this->y * other.y);
     }
     // static method that returns the dot product of two vectors 
     double Vector2d::dot(const Vector2d& v1, const Vector2d& v2) {
@@ -59,7 +59,7 @@ namespace Geo2d{
 
     // returns the cross product of two vectors
     double Vector2d::cross(const Vector2d& other) const {
-        return this->x * other.y - this->y * other.x;
+        return (this->x * other.y) - (this->x * other.y);
     }
     // static method that returns the cross product of the two vectors
     double Vector2d::cross(const Vector2d& v1, const Vector2d& v2) {
@@ -69,8 +69,8 @@ namespace Geo2d{
 
     // returns the angle between two vectors IN RADIANS
     double Vector2d::angleBetween(const Vector2d& other) const {
-        double dotProd = this->dot(other);
-        double magProduct = this->magnitude() * other.magnitude();
+        const double dotProd = this->dot(other);
+        const double magProduct = this->magnitude() * other.magnitude();
 
         // Protect against division by zero or floating point errors
         if (magProduct == 0) return 0.0;
@@ -103,7 +103,7 @@ namespace Geo2d{
 
     // returns the normalized vector
     Vector2d Vector2d::normalized() const{
-        double mag = this->magnitude();
+        const double mag = this->magnitude();
         if (mag == 0.0) return Vector2d(0, 0); // Avoid division by zero
         return Vector2d(x / mag, y / mag);
     }
