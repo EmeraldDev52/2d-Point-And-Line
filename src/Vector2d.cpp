@@ -59,7 +59,8 @@ namespace Geo2d{
 
     // returns the cross product of two vectors
     double Vector2d::cross(const Vector2d& other) const {
-        return (this->x * other.y) - (this->x * other.y);
+        return (this->x * other.y) - (this->y * other.x);
+
     }
     // static method that returns the cross product of the two vectors
     double Vector2d::cross(const Vector2d& v1, const Vector2d& v2) {
