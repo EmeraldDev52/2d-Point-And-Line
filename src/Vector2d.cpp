@@ -13,35 +13,6 @@ namespace Geo2d{
     {}   
 
 
-    //operator overloads
-    Vector2d Vector2d::operator+(const Vector2d& other) const {
-        return Vector2d(this->x + other.x, this->y + other.y);
-    }
-    Vector2d Vector2d::operator-(const Vector2d& other) const{
-        return Vector2d(this->x - other.x, this->y - other.y);
-    }
-
-    Vector2d Vector2d::operator*(double scalar) const{
-        return Vector2d(this->x * scalar, this->y * scalar);
-    }
-    Vector2d Vector2d::operator/(double scalar) const{
-        if (scalar == 0.0) {
-            throw std::invalid_argument("Division by zero is not allowed.");
-        }
-        return Vector2d(this->x / scalar, this->y / scalar);
-    }
-
-
-
-    bool Vector2d::operator==(const Vector2d& other) const {
-        constexpr double EPS = 1e-9;
-        return std::abs(x - other.x) < EPS && std::abs(y - other.y) < EPS;
-    }
-    bool Vector2d::operator!=(const Vector2d& other) const{
-        return !(*this == other); 
-    }
-
-
     // returns the distance between two vectors
     double Vector2d::distance(const Vector2d& other) const {
         return std::hypot(this->x - other.x, this->y - other.y);

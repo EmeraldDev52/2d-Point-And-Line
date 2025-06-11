@@ -34,3 +34,4 @@ install(EXPORT geometry2dTargets
     NAMESPACE Geo2d::
     DESTINATION lib/cmake/geometry2d
 )
+add_executable(app src/main.cpp)

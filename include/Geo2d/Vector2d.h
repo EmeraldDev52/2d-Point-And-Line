@@ -11,8 +11,8 @@ namespace Geo2d{
 
         
 
-        constexpr Vector2d() = default;// default constructor
-        constexpr Vector2d(double x, double y) : x(x), y(y) {}// constructor
+        Vector2d() = default;// default constructor
+        Vector2d(double x, double y) : x(x), y(y) {}// constructor
 
 
         //operator overloads
