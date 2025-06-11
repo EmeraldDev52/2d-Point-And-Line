@@ -74,10 +74,10 @@ namespace Geo2d{
 
 
     //CONSTS
-    const Vector2d Vector2d::ZERO{ 0.0, 0.0 };
-    const Vector2d Vector2d::UP{ 0.0, 1.0 };
-    const Vector2d Vector2d::DOWN{ 0.0, -1.0 };
-    const Vector2d Vector2d::LEFT{ -1.0, 0.0 };
-    const Vector2d Vector2d::RIGHT{ 1.0, 0.0 };
-    const Vector2d Vector2d::ONE{ 1.0, 1.0 };
+    const Vector2d Vector2d::ZERO = Vector2d{ 0.0, 0.0 };
+    const Vector2d Vector2d::UP = Vector2d{ 0.0, 1.0 };
+    const Vector2d Vector2d::DOWN = Vector2d{ 0.0, -1.0 };
+    const Vector2d Vector2d::LEFT = Vector2d{ -1.0, 0.0 };
+    const Vector2d Vector2d::RIGHT = Vector2d{ 1.0, 0.0 };
+    const Vector2d Vector2d::ONE = Vector2d{ 1.0, 1.0 };
 }

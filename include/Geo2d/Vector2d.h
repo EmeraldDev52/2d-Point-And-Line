@@ -12,7 +12,7 @@ namespace Geo2d{
         
 
         Vector2d() = default;// default constructor
-        Vector2d(double x, double y) : x(x), y(y) {}// constructor
+        Vector2d(double x, double y);// constructor
 
 
         //operator overloads
