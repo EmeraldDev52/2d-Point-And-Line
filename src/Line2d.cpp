@@ -64,6 +64,27 @@ namespace Geo2d{
     }
 
 
+    // checks if a vector2d is on a line
+    bool Line2d::contains(const Vector2d& point) const {
+        constexpr double EPS = 1e-8;
+
+        Vector2d AB = m_end - m_start;
+        Vector2d AP = point - m_start;
+
+
+        if (std::abs(AB.cross(AP)) > EPS)
+            return false;
+
+
+        double dotAB_AB = AB.dot(AB); 
+        double dotAP_AB = AP.dot(AB); 
+
+
+        return dotAP_AB >= -EPS && dotAP_AB <= dotAB_AB + EPS;
+    }
+
+
+
     // setter for start point
     void Line2d::setStart(const Vector2d& start) {
         if (start == m_end) {

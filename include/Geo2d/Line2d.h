@@ -31,6 +31,9 @@ namespace Geo2d{
         double length() const;// returns the length of the line
 
 
+        bool contains(const Vector2d& point) const;
+
+
         void print() const;// prints the points of the line
     };
 }
