@@ -26,8 +26,4 @@ namespace Geo2d{
 
         return true;
     }
-    // static method to check if two bounding boxes overlap
-    bool BoundingBox::intersects(const BoundingBox& box1, const BoundingBox& box2){
-        return box1.intersects(box2);
-    }
 }

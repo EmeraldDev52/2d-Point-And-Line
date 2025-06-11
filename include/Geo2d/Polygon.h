@@ -29,7 +29,6 @@ namespace Geo2d{
 
 
         bool overlaps(const Polygon& other) const;// checks if two polygons overlap
-        static bool overlaps(const Polygon& poly1, const Polygon& poly2);// static method to check if two polygons overlap
 
 
         bool contains(const Vector2d& point) const;// checks if a point is inside the 

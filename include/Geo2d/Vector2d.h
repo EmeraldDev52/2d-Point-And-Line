@@ -30,7 +30,7 @@ namespace Geo2d{
             return Vector2d(x / scalar, y / scalar); 
         }
         inline friend Vector2d operator/(double scalar, const Vector2d& v) {
-            constexpr double epsilon = 1e-9;
+            constexpr double epsilon = 1e-8;
             if (std::abs(v.x) < epsilon || std::abs(v.y) < epsilon)
                 throw std::invalid_argument("Division by zero component in vector");
 
@@ -39,26 +39,22 @@ namespace Geo2d{
 
 
         inline bool operator==(const Vector2d& other) const {
-            constexpr double epsilon = 1e-9;
+            constexpr double epsilon = 1e-8;
             return std::abs(x - other.x) < epsilon && std::abs(y - other.y) < epsilon;
         }
         inline bool operator!=(const Vector2d& other) const { return !(*this == other); }
 
 
         double distance(const Vector2d& other) const;// returns the distance between two vectors
-        static double distance(const Vector2d& v1, const Vector2d& other);// static method that returns the distance between two vectors
 
 
         double dot(const Vector2d& other) const;// returns the dot product of two vectors
-        static double dot(const Vector2d& v1, const Vector2d& v2);// static method that returns the dot product of two vectors
 
 
         double cross(const Vector2d& other) const;// returns the cross product of two vectors
-        static double cross(const Vector2d& v1, const Vector2d& v2);// static method that returns the cross product of two vectors
 
 
         double angleBetween(const Vector2d& other) const;// static method that returns the angle between two vectors
-        static double angleBetween(const Vector2d& v1, const Vector2d& v2);// static method that returns the angle between two vectors
 
 
         double magnitude() const;// returns the magnitude(length) of the vector

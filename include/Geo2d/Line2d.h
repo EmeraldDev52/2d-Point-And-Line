@@ -17,7 +17,6 @@ namespace Geo2d{
 
 
         std::optional<Vector2d> intersects(const Line2d& other) const;// checks if two lines intersect
-        static std::optional<Vector2d> intersects(const Line2d& line1, const Line2d& line2);// static method to check if two lines intersect
 
 
         Vector2d getStart() const { return m_start; }// getter for start point

@@ -46,19 +46,11 @@ namespace Geo2d{
     double Vector2d::distance(const Vector2d& other) const {
         return std::hypot(this->x - other.x, this->y - other.y);
     }
-    // static method that returns the distance between two vectors
-    double Vector2d::distance(const Vector2d& v1, const Vector2d& v2) {
-        return v1.distance(v2);
-    }
 
 
     // returns the dot product of two vectors
     double Vector2d::dot(const Vector2d& other) const {
         return (this->x * other.x) + (this->y * other.y);
-    }
-    // static method that returns the dot product of two vectors 
-    double Vector2d::dot(const Vector2d& v1, const Vector2d& v2) {
-        return v1.dot(v2);
     }
 
 
@@ -66,10 +58,6 @@ namespace Geo2d{
     double Vector2d::cross(const Vector2d& other) const {
         return (this->x * other.y) - (this->y * other.x);
 
-    }
-    // static method that returns the cross product of the two vectors
-    double Vector2d::cross(const Vector2d& v1, const Vector2d& v2) {
-        return v1.cross(v2);
     }
 
 
@@ -89,10 +77,6 @@ namespace Geo2d{
 
         return std::acos(cosTheta); // returns angle in radians
     }
-    // static method that returns the angle between two vectors
-    double Vector2d::angleBetween(const Vector2d& v1, const Vector2d& v2) {
-        return v1.angleBetween(v2);
-    }
 
 
     // prints the position of the points
@@ -110,7 +94,7 @@ namespace Geo2d{
     // returns the normalized vector
     Vector2d Vector2d::normalized() const{
         const double mag = this->magnitude();
-        if (mag == 0.0) return Vector2d(0, 0); // Avoid division by zero
+        if (mag == 0.0) throw std::runtime_error("Cannot normalize a zero vector"); // Avoid division by zero
         return Vector2d(x / mag, y / mag);
     }
 

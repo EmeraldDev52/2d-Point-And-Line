@@ -15,6 +15,5 @@ namespace Geo2d{
 
 
         bool intersects(const BoundingBox& other) const;// checks if 2 bounding boxes overlap
-        static bool intersects(const BoundingBox& box1, const BoundingBox& box2);// static method to check if two bounding boxes overlap
     };
 }

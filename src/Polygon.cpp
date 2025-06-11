@@ -1,6 +1,6 @@
 #include "../include/Geo2d/Polygon.h"
-#define M_PI 3.14159265358979323846
-#define DEG2RAD (M_PI / 180.0)
+constexpr double M_PI = 3.14159265358979323846;
+constexpr double DEG2RAD = M_PI / 180.0;
 #include <cmath>
 #include <iostream>
 #include "../include/Geo2d/Vector2d.h"
@@ -108,11 +108,6 @@ namespace Geo2d{
         }
         return false;
     }
-    // static method to check if two polygons overlap
-    bool Polygon::overlaps(const Polygon& poly1, const Polygon& poly2)
-    {
-        return poly1.overlaps(poly2);
-    }
 
 
     // returns the bounding box of the polygon
@@ -120,22 +115,21 @@ namespace Geo2d{
     {
         const std::vector<Vector2d>& verts = this->m_vertices;
 
-        Vector2d tl = verts[0];
-        Vector2d br = verts[0];
+        double minX = verts[0].x, maxX = verts[0].x;
+        double minY = verts[0].y, maxY = verts[0].y;
 
-        for (const Vector2d& p : verts)
-        {
-            if (p.x < tl.x) tl.x = p.x;
-            if (p.x > br.x) br.x = p.x;
-
-            if (p.y < tl.y) tl.y = p.y;
-            if (p.y > br.y) br.y = p.y;
+        for (const Vector2d& pt : verts) {
+            if (pt.x < minX) minX = pt.x;
+            if (pt.x > maxX) maxX = pt.x;
+            if (pt.y < minY) minY = pt.y;
+            if (pt.y > maxY) maxY = pt.y;
         }
 
-
+        Vector2d tl(minX, maxY);
+        Vector2d br(maxX, minY);
         return BoundingBox(tl, br);
-    }
 
+    }
 
     // checks if a point is inside the polygon
     bool Polygon::contains(const Vector2d& point) const {
@@ -143,6 +137,15 @@ namespace Geo2d{
 
         const std::vector<Vector2d>& verts = this->m_vertices;
 
+
+
+        for (size_t i = 0; i < verts.size(); ++i) {
+            Line2d edge(verts[i], verts[i++]);
+
+            if (edge.contains(point)) {
+                return true; // Point is exactly on edge
+            }
+        }
         for (size_t i = 0; i < verts.size(); ++i) {
 
             const Vector2d& p1 = verts[i];
@@ -155,7 +158,7 @@ namespace Geo2d{
             }
         }
 
-        return intersections % 2 != 0;
+        return((intersections % 2) != 0);
     }
 
 
@@ -169,7 +172,7 @@ namespace Geo2d{
         double cx = 0.0, cy = 0.0;
         double area = 0.0;
 
-        for (int i = 0; i < vertSize; ++i) {
+        for (size_t i = 0; i < vertSize; ++i) {
             const Vector2d& p1 = verts[i];
             const Vector2d& p2 = verts[(i + 1) % vertSize];
             const double cross = p1.x * p2.y - p2.x * p1.y;
@@ -205,7 +208,7 @@ namespace Geo2d{
 
             const Vector2d& p1 = verts[i];
             const Vector2d& p2 = verts[(i + 1) % vertSize];
-            area += Vector2d::cross(p1, p2);
+            area += p1.cross(p2);
         }
 
         return std::abs(area) * 0.5;

@@ -19,59 +19,30 @@ namespace Geo2d{
 
 
     // checks if two lines intersect
-    std::optional<Vector2d> Line2d::intersects(const Line2d& other) const
-    {
-        const Vector2d& A = m_start;
-        const Vector2d& B = m_end;
+    std::optional<Vector2d> Line2d::intersects(const Line2d& other) const {
+        const Vector2d& p = m_start;
+        const Vector2d  r = m_end - m_start;
 
-        const Vector2d& C = other.m_start;
-        const Vector2d& D = other.m_end;
+        const Vector2d& q = other.m_start;
+        const Vector2d  s = other.m_end - other.m_start;
 
-        // Orientation function
-        auto orientation = [](const Vector2d& a, const Vector2d& b, const Vector2d& c) -> Orientation {
-            double val = (b.y - a.y) * (c.x - b.x) -
-                        (b.x - a.x) * (c.y - b.y);
+        double r_cross_s = r.cross(s);
+        Vector2d q_minus_p = q - p;
+        double q_p_cross_r = q_minus_p.cross(r);
 
-            if (val == 0.0) return Orientation::COLINEAR;
-            return (val > 0.0) ? Orientation::CLOCKWISE : Orientation::COUNTERCLOCKWISE;
-        };
 
-        // orientation of the triples of points
-        Orientation o1 = orientation(A, B, C);
-        Orientation o2 = orientation(A, B, D);
-        Orientation o3 = orientation(C, D, A);
-        Orientation o4 = orientation(C, D, B);
-
-        // general case: lines intersect if orientations differ
-        if (o1 != o2 && o3 != o4) {
-            // calculate actual intersection point using line-line intersection math
-            const double& x1 = A.x, y1 = A.y;
-            const double& x2 = B.x, y2 = B.y;
-            const double& x3 = C.x, y3 = C.y;
-            const double& x4 = D.x, y4 = D.y;
-
-            const double denom = (x1 - x2) * (y3 - y4) - 
-                        (y1 - y2) * (x3 - x4);
-
-            if (denom == 0.0){
-                return std::nullopt; // should not happen if orientations already differ but could due to floating point precision issues
-            }
-
-            double px = ((x1 * y2 - y1 * x2) * (x3 - x4) -
-                        (x1 - x2) * (x3 * y4 - y3 * x4)) / denom;
-
-            double py = ((x1 * y2 - y1 * x2) * (y3 - y4) -
-                        (y1 - y2) * (x3 * y4 - y3 * x4)) / denom;
-
-            return Vector2d(px, py);
+        if (std::abs(r_cross_s) < 1e-10) {
+            return std::nullopt;
         }
 
-        // no intersection
+        double t = q_minus_p.cross(s) / r_cross_s;
+        double u = q_minus_p.cross(r) / r_cross_s;
+
+        if (t >= 0.0 && t <= 1.0 && u >= 0.0 && u <= 1.0) {
+            return p + r * t;
+        }
+
         return std::nullopt;
-    }
-    // static method to check if two lines intersect
-    std::optional<Vector2d> Line2d::intersects(const Line2d& line1, const Line2d& line2) {
-        return line1.intersects(line2);
     }
         
 
